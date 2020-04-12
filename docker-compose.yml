@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   master-diet-app:
-    image: master-diet-app:1
+    container_name: master-diet-backend-application
     build:
       context: ./
       dockerfile: Dockerfile
@@ -10,3 +10,13 @@ services:
       - /data/master-diet-app-data
     ports:
       - "8081:8081"
+
+#  master-diet-database:
+#    image: postgres:11.7
+#    container_name: master-diet-database
+#    restart: always
+#    ports:
+#      - 5433:5433
+#    volumes:
+#      - ./db_data:/var/lib/postgresql/data:z
+#      - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql:z
