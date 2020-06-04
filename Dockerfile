@@ -13,5 +13,5 @@ RUN mvn -f /home/app/pom.xml clean package dependency:resolve
 #
 FROM openjdk:11-jre-slim
 COPY --from=build /home/app/target/master-diet-backend-application.jar /usr/local/lib/master-diet-backend-application.jar
-EXPOSE 8081
-ENTRYPOINT ["java","-jar","/usr/local/lib/master-diet-backend-application.jar"]
+EXPOSE 8081 8001
+ENTRYPOINT ["java","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8001","-jar","/usr/local/lib/master-diet-backend-application.jar"]
