@@ -14,6 +14,6 @@ services:
     command: java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8001 -jar /usr/local/lib/master-diet-backend-application.jar
     environment:
       # Windows
-      - spring.datasource.url=jdbc:postgresql://host.docker.internal:5433/master-diet-db
+#      - spring.datasource.url=jdbc:postgresql://host.docker.internal:5433/master-diet-db
       # Linux
-#      - spring.datasource.url=jdbc:postgresql://172.17.0.1:5433/master-diet-db
+      - spring.datasource.url=jdbc:postgresql://172.17.0.1:5433/master-diet-db
