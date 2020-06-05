@@ -1,12 +1,19 @@
 package pl.agh.edu.master_diet.core.model.rest.caloricDemand;
 
-import lombok.NonNull;
+import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Gender;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserParametersRequest {
 
-public class CustomerParametersRequest {
 
+    @NonNull
+    private int userId;
     @NonNull
     private Integer age;
     @NonNull

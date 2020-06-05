@@ -7,13 +7,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="customer_parameters")
+@Table(name="user_weight")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class CustomerParameters {
+public class UserWeight {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

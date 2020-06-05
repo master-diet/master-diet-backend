@@ -1,9 +1,9 @@
 package pl.agh.edu.master_diet.service.converter;
 
-import pl.agh.edu.master_diet.core.model.rest.caloricDemand.CustomerParametersRequest;
-import pl.agh.edu.master_diet.core.model.database.CustomerParameters;
+import pl.agh.edu.master_diet.core.model.rest.caloricDemand.UserParametersRequest;
+import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 
 public interface ConversionService {
 
-    CustomerParameters convert(CustomerParametersRequest request);
+    UserParameters convert(UserParametersRequest request);
 }
