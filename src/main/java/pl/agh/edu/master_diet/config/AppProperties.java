@@ -41,7 +41,7 @@ public class AppProperties {
             return authorizedRedirectUris;
         }
 
-        public OAuth2 authorizedRedirectUris(List<String> authorizedRedirectUris) {
+        public OAuth2 setAuthorizedRedirectUris(List<String> authorizedRedirectUris) {
             this.authorizedRedirectUris = authorizedRedirectUris;
             return this;
         }

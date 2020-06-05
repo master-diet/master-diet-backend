@@ -15,7 +15,7 @@ public class DbInfoRepository
 
     @Override
     public ZonedDateTime getSysdate() {
-        log.info("Próba pobrania daty systemowej bazy danych");
+        log.info("Trying to get current timestamp of the database");
 
         final String sysDateQuery = "SELECT CURRENT_TIMESTAMP";
 
