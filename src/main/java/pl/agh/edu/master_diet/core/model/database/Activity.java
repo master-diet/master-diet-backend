@@ -8,43 +8,39 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "user_gamification_detail")
+@Table(name = "activity")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserGamificationDetail {
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private Integer points;
+    private String name;
+
+    private String description;
 
     @Column(nullable = false)
-    private Integer cheatTokens;
+    private Integer burnedCalories;
+
+    private Integer defaultReps;
+
+    private Integer defaultSets;
+
+    private BigDecimal defaultTime;
 
     @Column(nullable = false)
     private Integer completeCondition;
-
-    @OneToOne
-    @MapsId
-    private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "daily_challenge_id", nullable = false)
-    private DailyChallenge dailyChallenge;
 }

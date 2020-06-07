@@ -14,37 +14,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_gamification_detail")
+@Table(name = "user_activity")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserGamificationDetail {
+public class UserActivity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Integer points;
+    private Integer sets;
+
+    private Integer reps;
+
+    private BigDecimal time;
 
     @Column(nullable = false)
-    private Integer cheatTokens;
+    private LocalDateTime auditDate;
 
-    @Column(nullable = false)
-    private Integer completeCondition;
-
-    @OneToOne
-    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "daily_challenge_id", nullable = false)
-    private DailyChallenge dailyChallenge;
+    @JoinColumn(name = "activity_id", nullable = false)
+    private Activity activity;
 }
