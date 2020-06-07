@@ -54,7 +54,7 @@ public class UserPlan {
     private Goal goal;
 
     @Column(nullable = false)
-    private Integer currentWeight;
+    private Float currentWeight;
 
     @OneToOne
     @MapsId
@@ -69,5 +69,4 @@ public class UserPlan {
                 .proteins(getProteins())
                 .build();
     }
-
 }

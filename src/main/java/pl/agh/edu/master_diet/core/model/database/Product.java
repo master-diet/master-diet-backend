@@ -5,38 +5,54 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.agh.edu.master_diet.core.model.shared.Unit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "activity")
+@Table(name = "product")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Activity {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
-
-    private String description;
+    private Float defaultValue;
 
     @Column(nullable = false)
-    private Float burnedCalories;
+    private String name;
 
-    private Integer defaultReps;
+    private String notes;
 
-    private Integer defaultSets;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Unit unit;
 
-    private Float defaultTime;
+    @Column(nullable = false)
+    private Float calories;
+
+    @Column(nullable = false)
+    private Float proteins;
+
+    @Column(nullable = false)
+    private Float fat;
+
+    @Column(nullable = false)
+    private Float carbohydrates;
+
+    @Column(nullable = false)
+    private Integer approvals;
 }

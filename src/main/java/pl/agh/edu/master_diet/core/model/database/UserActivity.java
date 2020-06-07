@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,9 +34,9 @@ public class UserActivity {
 
     private Integer reps;
 
-    private BigDecimal time;
+    private Float time;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime auditDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
