@@ -14,4 +14,5 @@ public class UserParameters {
     private Integer height;
     private Integer weight;
     private ActivityLevel activityLevel;
+    private Goal goal;
 }

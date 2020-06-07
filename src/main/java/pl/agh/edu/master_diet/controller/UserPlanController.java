@@ -6,25 +6,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.agh.edu.master_diet.core.model.rest.caloricDemand.UserParametersRequest;
+import pl.agh.edu.master_diet.core.model.rest.userPlan.UserParametersRequest;
+import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
-import pl.agh.edu.master_diet.service.CaloricDemandService;
+import pl.agh.edu.master_diet.service.UserPlanService;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/caloricDemand")
+@RequestMapping("/plan")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class CaloricDemandController {
+public class UserPlanController {
 
     private final ConversionService conversionService;
-    private final CaloricDemandService caloricDemandService;
+    private final UserPlanService userPlanService;
 
     @PostMapping
-    public int calculateAndGetCaloricDemand(@Valid @RequestBody UserParametersRequest request){
+    public UserPlanResponse calculateUserPlan(@Valid @RequestBody UserParametersRequest request) {
         UserParameters userParameters = conversionService.convert(request);
-        return caloricDemandService.calculateAndSaveUsersCaloricDemand(userParameters);
+        return userPlanService.calculateAndSaveUsersPlan(userParameters);
     }
 
 }

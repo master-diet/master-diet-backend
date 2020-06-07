@@ -1,8 +1,9 @@
-package pl.agh.edu.master_diet.core.model.rest.caloricDemand;
+package pl.agh.edu.master_diet.core.model.rest.userPlan;
 
 import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Gender;
+import pl.agh.edu.master_diet.core.model.shared.Goal;
 
 @Getter
 @Setter
@@ -10,7 +11,6 @@ import pl.agh.edu.master_diet.core.model.shared.Gender;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserParametersRequest {
-
 
     @NonNull
     private int userId;
@@ -24,4 +24,6 @@ public class UserParametersRequest {
     private Integer weight;
     @NonNull
     private ActivityLevel activityLevel;
+    @NonNull
+    private Goal goal;
 }
