@@ -7,4 +7,5 @@ public enum ActivityLevel {
     MODERATE,
     ACTIVE,
     VERY_ACTIVE
+
 }

@@ -16,5 +16,4 @@ public class UserPlanResponse {
     private Float fat;
     @NonNull
     private Float carbohydrates;
-
 }
