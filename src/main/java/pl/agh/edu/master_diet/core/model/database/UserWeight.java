@@ -26,4 +26,8 @@ public class UserWeight {
     @CreationTimestamp
     private Date creation_date;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

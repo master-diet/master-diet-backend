@@ -8,15 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.agh.edu.master_diet.core.model.common.AuthProvider;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -33,7 +25,6 @@ import javax.validation.constraints.NotNull;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -51,6 +42,9 @@ public class User {
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserPlan userPlan;
 
     private String providerId;
 }
