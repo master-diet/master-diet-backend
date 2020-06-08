@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 
@@ -59,14 +58,4 @@ public class UserPlan {
     @OneToOne
     @MapsId
     private User user;
-
-    public UserPlanResponse map2UserPlanResponse() {
-        return UserPlanResponse.builder()
-                .userId(getId())
-                .calories(getCalories())
-                .carbohydrates(getCarbohydrates())
-                .fat(getFat())
-                .proteins(getProteins())
-                .build();
-    }
 }
