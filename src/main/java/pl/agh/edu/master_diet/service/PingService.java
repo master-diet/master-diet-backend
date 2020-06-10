@@ -5,13 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.repository.InfoRepository;
 
-import java.io.IOException;
 import java.time.ZonedDateTime;
-import java.util.Properties;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class PingService {
+public final class PingService {
 
     private static final String PING_RESPONSE_MESSAGE = "Welcome to Master Diet";
     private final InfoRepository infoRepository;

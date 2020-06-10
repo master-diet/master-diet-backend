@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @ConfigurationProperties(prefix = "app")
-public class AppProperties {
+public final class AppProperties {
 
     private final Auth auth = new Auth();
     private final OAuth2 oauth2 = new OAuth2();

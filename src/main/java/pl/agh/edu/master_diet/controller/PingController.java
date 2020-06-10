@@ -11,7 +11,7 @@ import pl.agh.edu.master_diet.service.PingService;
 @RestController
 @RequestMapping("/")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class PingController {
+public final class PingController {
 
     private final PingService pingService;
 

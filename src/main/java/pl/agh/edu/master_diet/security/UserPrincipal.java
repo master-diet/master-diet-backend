@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class UserPrincipal implements OAuth2User, UserDetails {
+public final class UserPrincipal implements OAuth2User, UserDetails {
 
     @Getter
     private final Long id;
@@ -99,7 +99,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
         return String.valueOf(id);
     }
 
-    public void setAttributes(Map<String, Object> attributes) {
+    public void setAttributes(final Map<String, Object> attributes) {
         this.attributes = attributes;
     }
 }

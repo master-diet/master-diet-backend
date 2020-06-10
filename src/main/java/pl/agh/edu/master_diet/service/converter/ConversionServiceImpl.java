@@ -13,7 +13,7 @@ public final class ConversionServiceImpl implements ConversionService {
     private final UserPlanConverter userPlanConverter;
 
     @Override
-    public UserPlanResponse convert(UserPlan userPlan) {
+    public UserPlanResponse convert(final UserPlan userPlan) {
         return userPlanConverter.createFrom(userPlan);
     }
 }

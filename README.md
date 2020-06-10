@@ -5,10 +5,10 @@
 <img src="https://img.shields.io/github/issues/master-diet/master-diet-backend?&style=for-the-badge">
 <img src="https://img.shields.io/github/issues-pr/master-diet/master-diet-backend?style=for-the-badge">
 
-### Build & Run
+### Run checkstyle
 
-```bash
-docker-compose up --build
+```
+mvn checkstyle:checkstyle
 ```
 
 ### Test
