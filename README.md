@@ -7,6 +7,8 @@
 
 ### Run checkstyle
 
+Configured based on: https://checkstyle.org/
+
 ```
 mvn checkstyle:checkstyle
 ```

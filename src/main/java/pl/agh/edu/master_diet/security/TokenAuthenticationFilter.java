@@ -1,6 +1,5 @@
 package pl.agh.edu.master_diet.security;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,13 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public final class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private static final int BEARER_TOKEN_SUBSTRING_INDICATOR = 7;
 
-    private final TokenProvider tokenProvider;
-    private final CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private TokenProvider tokenProvider;
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request,
