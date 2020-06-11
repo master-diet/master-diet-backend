@@ -1,5 +1,6 @@
 package pl.agh.edu.master_diet.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +12,14 @@ import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
 
 @RestController
-public class UserController {
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+public final class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('USER')")
-    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+    public User getCurrentUser(@CurrentUser final UserPrincipal userPrincipal) {
         return userRepository.findById(userPrincipal.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }

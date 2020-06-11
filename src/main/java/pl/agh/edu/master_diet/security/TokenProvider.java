@@ -18,7 +18,7 @@ import java.util.Date;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class TokenProvider {
+public final class TokenProvider {
 
     private final AppProperties appProperties;
 
@@ -36,7 +36,7 @@ public class TokenProvider {
                 .compact();
     }
 
-    public Long getUserIdFromToken(String token) {
+    public Long getUserIdFromToken(final String token) {
         final Claims claims = Jwts.parser()
                 .setSigningKey(appProperties.getAuth().getTokenSecret())
                 .parseClaimsJws(token)
@@ -45,7 +45,7 @@ public class TokenProvider {
         return Long.parseLong(claims.getSubject());
     }
 
-    public boolean validateToken(String authToken) {
+    public boolean validateToken(final String authToken) {
         try {
             Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
             return true;
