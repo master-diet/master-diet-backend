@@ -15,13 +15,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserParametersRequest {
 
-    private static final String DATE_FORMAT = "MM/dd/yyyy";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
     @NonNull
     private Long userId;
 
     @NonNull
-    @JsonFormat(pattern = "MM/dd/yyyy")
+    @JsonFormat(pattern = DATE_FORMAT)
     private LocalDate birthDate;
 
     @NonNull
