@@ -3,10 +3,11 @@ package pl.agh.edu.master_diet.service.converter;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 
-public class UserPlanConverter implements GenericConverter<UserPlan, UserPlanResponse> {
+public final class UserPlanConverter
+        implements GenericConverter<UserPlan, UserPlanResponse> {
 
     @Override
-    public UserPlanResponse createFrom(UserPlan dto) {
+    public UserPlanResponse createFrom(final UserPlan dto) {
         return UserPlanResponse.builder()
                 .userId(dto.getId())
                 .calories(dto.getCalories())

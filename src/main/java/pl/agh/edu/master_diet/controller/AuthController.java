@@ -29,7 +29,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class AuthController {
+public final class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
