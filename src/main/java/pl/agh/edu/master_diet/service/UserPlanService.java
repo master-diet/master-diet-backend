@@ -93,10 +93,10 @@ public class UserPlanService {
         double heightDemand = HEIGHT_COEFFICIENT_DEMAND * weight;
         double ageDemand = AGE_COEFFICIENT_DEMAND * age;
         int genderDemand = userParameters.getGender().getValue();
-        double BMR = weightDemand + heightDemand - ageDemand + genderDemand;
+        double userBMR = weightDemand + heightDemand - ageDemand + genderDemand;
         double activityFactor = userParameters.getActivityLevel().getValue();
-        double goalCaloriesCorrection = userParameters.getGoal().getValue() * BMR;
-        return BMR * activityFactor + goalCaloriesCorrection;
+        double goalCaloriesCorrection = userParameters.getGoal().getValue() * userBMR;
+        return userBMR * activityFactor + goalCaloriesCorrection;
     }
 
     private int getAgeFromBirthDate(LocalDate birthDate) {
