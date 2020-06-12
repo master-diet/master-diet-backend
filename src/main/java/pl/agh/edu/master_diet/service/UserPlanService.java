@@ -18,14 +18,14 @@ import java.time.Period;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserPlanService {
 
-    private final static Integer WEIGHT_COEFFICIENT_DEMAND = 10;
-    private final static Double HEIGHT_COEFFICIENT_DEMAND = 6.25;
-    private final static Integer AGE_COEFFICIENT_DEMAND = 5;
-    private final static Double MIN_PROTEIN_COEFFICIENT = 1.57;
-    private final static Double MAX_PROTEIN_COEFFICIENT = 2.0;
-    private final static Double PROTEIN_ENERGY_PER_GRAM = 4.0;
-    private final static Double FAT_ENERGY_PER_GRAM = 9.0;
-    private final static Double CARBOHYDRATES_ENERGY_PER_GRAM = 4.0;
+    private static final Integer WEIGHT_COEFFICIENT_DEMAND = 10;
+    private static final Double HEIGHT_COEFFICIENT_DEMAND = 6.25;
+    private static final Integer AGE_COEFFICIENT_DEMAND = 5;
+    private static final Double MIN_PROTEIN_COEFFICIENT = 1.57;
+    private static final Double MAX_PROTEIN_COEFFICIENT = 2.0;
+    private static final Double PROTEIN_ENERGY_PER_GRAM = 4.0;
+    private static final Double FAT_ENERGY_PER_GRAM = 9.0;
+    private static final Double CARBOHYDRATES_ENERGY_PER_GRAM = 4.0;
 
 
     private final UserPlanRepository userPlanRepository;
