@@ -1,23 +1,32 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import pl.agh.edu.master_diet.core.model.common.AuthProvider;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_plan")
 @Setter
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserPlan {
 
     @Id
@@ -43,6 +52,9 @@ public class UserPlan {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Goal goal;
+
+    @Column(nullable = false)
+    private Float currentWeight;
 
     @OneToOne
     @MapsId
