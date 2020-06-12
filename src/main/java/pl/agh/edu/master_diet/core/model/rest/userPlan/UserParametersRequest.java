@@ -5,6 +5,8 @@ import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Gender;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Builder
@@ -13,17 +15,26 @@ import pl.agh.edu.master_diet.core.model.shared.Goal;
 public class UserParametersRequest {
 
     @NonNull
-    private int userId;
+    private Long userId;
+
     @NonNull
-    private Integer age;
+    private LocalDate birthDate;
+
     @NonNull
     private Gender gender;
+
     @NonNull
     private Integer height;
+
     @NonNull
-    private Integer weight;
+    private Double weight;
+
     @NonNull
     private ActivityLevel activityLevel;
+
     @NonNull
     private Goal goal;
+
+    @NonNull
+    private Double fatPreferencesPercentage;
 }

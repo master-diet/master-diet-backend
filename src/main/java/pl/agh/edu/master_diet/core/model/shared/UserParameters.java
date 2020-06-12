@@ -1,6 +1,11 @@
 package pl.agh.edu.master_diet.core.model.shared;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Builder
 @Getter
@@ -8,11 +13,19 @@ import lombok.*;
 @AllArgsConstructor
 public class UserParameters {
 
-    private int userId;
-    private Integer age;
+    private Long userId;
+
+    private LocalDate birthDate;
+
     private Gender gender;
+
     private Integer height;
-    private Integer weight;
+
+    private Double weight;
+
     private ActivityLevel activityLevel;
+
     private Goal goal;
+
+    private Double fatPreferencesPercentage;
 }

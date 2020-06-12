@@ -32,7 +32,7 @@ public class UserWeight {
     private Long id;
 
     @Column(nullable = false)
-    private Float weight;
+    private Double weight;
 
     @Column(name = "creation_date", updatable = false)
     @CreationTimestamp

@@ -10,12 +10,13 @@ public final class UserParametersConverter implements GenericConverter<UserParam
     public UserParameters createFrom(UserParametersRequest dto) {
         return UserParameters.builder()
                 .userId(dto.getUserId())
-                .age(dto.getAge())
+                .birthDate(dto.getBirthDate())
                 .gender(dto.getGender())
                 .activityLevel(dto.getActivityLevel())
                 .height(dto.getHeight())
                 .weight(dto.getWeight())
                 .goal(dto.getGoal())
+                .fatPreferencesPercentage(dto.getFatPreferencesPercentage())
                 .build();
     }
 }
