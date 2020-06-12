@@ -10,6 +10,7 @@ import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 import pl.agh.edu.master_diet.repository.UserPlanRepository;
+import pl.agh.edu.master_diet.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -29,11 +30,11 @@ public class UserPlanService {
 
 
     private final UserPlanRepository userPlanRepository;
+    private final UserRepository userRepository;
 
     public UserPlanResponse calculateAndSaveUsersPlan(UserParameters userParameters) {
         UserPlan userPlan = calculateUsersPlan(userParameters);
-        User user = new User();
-        user.setId(userParameters.getUserId());
+        User user = userRepository.getOne(userParameters.getUserId());
         userPlan.setUser(user);
         userPlanRepository.save(userPlan);
 

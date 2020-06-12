@@ -1,5 +1,6 @@
 package pl.agh.edu.master_diet.core.model.rest.userPlan;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Gender;
@@ -14,10 +15,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserParametersRequest {
 
+    private static final String DATE_FORMAT = "MM/dd/yyyy";
+
     @NonNull
     private Long userId;
 
     @NonNull
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private LocalDate birthDate;
 
     @NonNull
