@@ -62,6 +62,7 @@ public class UserPlan {
                 .fat(getFat())
                 .proteins(getProteins())
                 .build();
+
     }
 
 }
