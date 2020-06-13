@@ -1,7 +1,7 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import pl.agh.edu.master_diet.core.model.common.AuthProvider;
 
 import javax.persistence.*;
@@ -53,7 +53,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private UserPlan userPlan;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)

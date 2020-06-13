@@ -1,6 +1,9 @@
 package pl.agh.edu.master_diet.core.model.database;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
@@ -14,6 +17,9 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class UserPlan {
 
     @Id
@@ -45,6 +51,7 @@ public class UserPlan {
 
     @OneToOne
     @MapsId
+    @JsonIgnore
     private User user;
 
     public UserPlanResponse map2UserPlanResponse() {
