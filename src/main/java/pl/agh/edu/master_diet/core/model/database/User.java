@@ -2,6 +2,7 @@ package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import pl.agh.edu.master_diet.core.model.common.AuthProvider;
 
 import javax.persistence.*;
@@ -55,10 +56,11 @@ public class User {
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonManagedReference
     private UserPlan userPlan;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private UserGamificationDetail userGamificationDetail;
 
     private String providerId;

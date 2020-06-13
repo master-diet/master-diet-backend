@@ -3,7 +3,7 @@ package pl.agh.edu.master_diet.core.model.database;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
@@ -23,7 +23,6 @@ import javax.persistence.*;
 public class UserPlan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -51,7 +50,7 @@ public class UserPlan {
 
     @OneToOne
     @MapsId
-    @JsonIgnore
+    @JsonBackReference
     private User user;
 
     public UserPlanResponse map2UserPlanResponse() {

@@ -1,22 +1,9 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.codehaus.jackson.annotate.JsonBackReference;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user_gamification_detail")
@@ -28,7 +15,6 @@ import javax.persistence.Table;
 public class UserGamificationDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -42,6 +28,7 @@ public class UserGamificationDetail {
 
     @OneToOne
     @MapsId
+    @JsonBackReference
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
