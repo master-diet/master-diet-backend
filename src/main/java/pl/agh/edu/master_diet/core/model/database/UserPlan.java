@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonBackReference;
-import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 
@@ -52,16 +51,5 @@ public class UserPlan {
     @MapsId
     @JsonBackReference
     private User user;
-
-    public UserPlanResponse map2UserPlanResponse() {
-        return UserPlanResponse.builder()
-                .userId(getId())
-                .calories(getCalories())
-                .carbohydrates(getCarbohydrates())
-                .fat(getFat())
-                .proteins(getProteins())
-                .build();
-
-    }
 
 }
