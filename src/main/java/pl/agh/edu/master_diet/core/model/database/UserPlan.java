@@ -1,23 +1,13 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user_plan")
@@ -26,23 +16,25 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class UserPlan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private Integer calories;
 
     @Column(nullable = false)
-    private Float proteins;
+    private Integer proteins;
 
     @Column(nullable = false)
-    private Float fat;
+    private Integer fat;
 
     @Column(nullable = false)
-    private Float carbohydrates;
+    private Integer carbohydrates;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -53,9 +45,11 @@ public class UserPlan {
     private Goal goal;
 
     @Column(nullable = false)
-    private Float currentWeight;
+    private Double currentWeight;
 
     @OneToOne
     @MapsId
+    @JsonBackReference
     private User user;
+
 }

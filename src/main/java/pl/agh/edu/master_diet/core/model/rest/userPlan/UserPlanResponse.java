@@ -21,11 +21,11 @@ public class UserPlanResponse {
     private Integer calories;
 
     @NonNull
-    private Float proteins;
+    private Integer proteins;
 
     @NonNull
-    private Float fat;
+    private Integer fat;
 
     @NonNull
-    private Float carbohydrates;
+    private Integer carbohydrates;
 }

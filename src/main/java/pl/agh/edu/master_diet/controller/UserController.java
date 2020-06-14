@@ -13,7 +13,7 @@ import pl.agh.edu.master_diet.security.UserPrincipal;
 
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public final class UserController {
+public class UserController {
 
     private final UserRepository userRepository;
 

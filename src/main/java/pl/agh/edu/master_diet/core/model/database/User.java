@@ -1,11 +1,8 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import pl.agh.edu.master_diet.core.model.common.AuthProvider;
 
 import javax.persistence.*;
@@ -57,10 +54,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private UserPlan userPlan;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private UserGamificationDetail userGamificationDetail;
 
     private String providerId;
