@@ -1,8 +1,10 @@
 package pl.agh.edu.master_diet.service.converter;
 
+import org.springframework.stereotype.Component;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
 
+@Component
 public final class UserPlanConverter
         implements GenericConverter<UserPlan, UserPlanResponse> {
 
