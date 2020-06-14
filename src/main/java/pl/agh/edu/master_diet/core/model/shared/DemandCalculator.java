@@ -81,6 +81,6 @@ public class DemandCalculator {
     }
 
     private int getAgeFromBirthDate(LocalDate birthDate) {
-        return Period.between(birthDate, birthDate).getYears();
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 }
