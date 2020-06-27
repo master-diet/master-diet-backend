@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
-import pl.agh.edu.master_diet.core.model.rest.userPlan.UserPlanResponse;
+import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.DemandCalculator;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 import pl.agh.edu.master_diet.repository.UserPlanRepository;

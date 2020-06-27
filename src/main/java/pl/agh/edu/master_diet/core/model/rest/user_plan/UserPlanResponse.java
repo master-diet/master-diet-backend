@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.core.model.rest.userPlan;
+package pl.agh.edu.master_diet.core.model.rest.user_plan;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
