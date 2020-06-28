@@ -9,7 +9,9 @@ import pl.agh.edu.master_diet.core.model.shared.BmiParameters;
 public class CalculatorService {
 
     public CalculateBmiResponse calculateBmi(final BmiParameters bmiParameters) {
-        final double bmi = bmiParameters.getWeight() / bmiParameters.getHeight() * bmiParameters.getHeight();
+        final Double weight = bmiParameters.getWeight();
+        final Double height = bmiParameters.getHeight() / 100.0d;
+        final double bmi = weight / (height * height);
 
         return CalculateBmiResponse.builder()
                 .bmi(Precision.round(bmi, 2))
