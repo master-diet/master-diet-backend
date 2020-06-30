@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pl.agh.edu.master_diet.core.model.shared.WeightRange;
 
 @Getter
 @Builder
@@ -12,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class CalculateBmiResponse {
 
     private Double bmi;
+    private WeightRange weightRange;
 }

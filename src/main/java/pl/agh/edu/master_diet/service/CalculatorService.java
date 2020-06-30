@@ -4,6 +4,7 @@ import org.apache.commons.math3.util.Precision;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBmiResponse;
 import pl.agh.edu.master_diet.core.model.shared.BmiParameters;
+import pl.agh.edu.master_diet.core.model.shared.WeightRange;
 
 @Service
 public class CalculatorService {
@@ -15,6 +16,7 @@ public class CalculatorService {
 
         return CalculateBmiResponse.builder()
                 .bmi(Precision.round(bmi, 2))
+                .weightRange(WeightRange.getWeightRangeFromBmi(bmi))
                 .build();
     }
 }
