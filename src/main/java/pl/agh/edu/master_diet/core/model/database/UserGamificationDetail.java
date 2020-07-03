@@ -17,13 +17,16 @@ public class UserGamificationDetail {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer points;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer level;
+
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer cheatTokens;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer completeCondition;
 
     @OneToOne
@@ -32,6 +35,6 @@ public class UserGamificationDetail {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "daily_challenge_id", nullable = false)
+    @JoinColumn(name = "daily_challenge_id")
     private DailyChallenge dailyChallenge;
 }
