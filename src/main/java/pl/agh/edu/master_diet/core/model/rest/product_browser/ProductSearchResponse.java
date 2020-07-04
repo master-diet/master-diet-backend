@@ -18,4 +18,7 @@ public class ProductSearchResponse {
 
     @NonNull
     private List<BaseProductInfo> products;
+
+    @NonNull
+    private Integer maximumPageNumber;
 }

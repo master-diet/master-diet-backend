@@ -23,7 +23,7 @@ public class ProductBrowserService {
     private final ProductRepository productRepository;
     private final ConversionService conversionService;
 
-    public ProductSearchResponse searchProducts(String searchTerm) {
+    public ProductSearchResponse searchProducts(String searchTerm, Integer pageIndex, Integer perPage) {
         searchTerm = searchTerm.trim().toLowerCase();
         List<Product> result = productRepository.findBySearchTerm(searchTerm);
 
@@ -33,10 +33,14 @@ public class ProductBrowserService {
             result.addAll(productsForSearchTermWithTypo);
         }
 
+        Integer maximumPageNumber = calculateMaximumPageNumber(result, perPage);
+        result = adjustResultListToPageInfo(result, pageIndex, perPage);
+
         return ProductSearchResponse.builder()
                 .products(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
+                .maximumPageNumber(maximumPageNumber)
                 .build();
     }
 
@@ -59,5 +63,13 @@ public class ProductBrowserService {
             return searchTerm.substring(0, searchTerm.length() - 1);
 
         return searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
+    }
+
+    private Integer calculateMaximumPageNumber(List<Product> result, Integer perPage) {
+        return (int) Math.ceil((double) result.size() / perPage);
+    }
+
+    private List<Product> adjustResultListToPageInfo(List<Product> products, Integer pageIndex, Integer perPage) {
+        return products.subList((pageIndex - 1) * perPage, pageIndex * perPage);
     }
 }

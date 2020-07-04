@@ -11,9 +11,11 @@ public final class ProductConverter
     @Override
     public BaseProductInfo createFrom(final Product dto) {
         return BaseProductInfo.builder()
+                .id(dto.getId())
                 .name(dto.getName())
                 .calories(dto.getCalories().longValue())
                 .defaultValue(dto.getDefaultValue().longValue())
+                .unit(dto.getUnit())
                 .build();
     }
 }

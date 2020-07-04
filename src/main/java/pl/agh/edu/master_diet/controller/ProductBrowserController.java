@@ -17,8 +17,10 @@ public class ProductBrowserController {
     private final ProductBrowserService productBrowserService;
 
     @GetMapping
-    public ProductSearchResponse searchProduct(@RequestParam String searchTerm) {
-        return productBrowserService.searchProducts(searchTerm);
+    public ProductSearchResponse searchProduct(@RequestParam String searchTerm,
+                                               @RequestParam Integer pageIndex,
+                                               @RequestParam Integer perPage) {
+        return productBrowserService.searchProducts(searchTerm, pageIndex, perPage);
     }
 }
 

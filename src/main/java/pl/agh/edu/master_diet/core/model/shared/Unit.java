@@ -1,5 +1,6 @@
 package pl.agh.edu.master_diet.core.model.shared;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.agh.edu.master_diet.exception.UnitSymbolNotFoundException;
@@ -19,5 +20,10 @@ public enum Unit {
                 return unit;
         }
         throw new UnitSymbolNotFoundException(symbol);
+    }
+
+    @JsonValue
+    public String getSymbol() {
+        return this.symbol;
     }
 }
