@@ -70,6 +70,8 @@ public class ProductBrowserService {
     }
 
     private List<Product> adjustResultListToPageInfo(List<Product> products, Integer pageIndex, Integer perPage) {
-        return products.subList((pageIndex - 1) * perPage, pageIndex * perPage);
+        int startIndex = (pageIndex - 1) * perPage;
+        int endIndex = Math.min(products.size(), pageIndex * perPage);
+        return products.subList(startIndex, endIndex);
     }
 }
