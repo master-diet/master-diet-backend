@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBmiRequest;
-import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBmiResponse;
-import pl.agh.edu.master_diet.core.model.shared.BmiParameters;
+import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
+import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIResponse;
+import pl.agh.edu.master_diet.core.model.shared.BMIParameters;
 import pl.agh.edu.master_diet.service.CalculatorService;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
@@ -23,10 +23,10 @@ public class CalculatorController {
     private final CalculatorService calculatorService;
     private final ConversionService conversionService;
 
-    @PostMapping("/bmi")
-    public ResponseEntity<CalculateBmiResponse> calculateBmi(@Valid @RequestBody final CalculateBmiRequest request) {
-        final BmiParameters bmiParameters = conversionService.convert(request);
+    @PostMapping("/BMI")
+    public ResponseEntity<CalculateBMIResponse> calculateBMI(@Valid @RequestBody final CalculateBMIRequest request) {
+        final BMIParameters bmiParameters = conversionService.convert(request);
         return ResponseEntity.ok()
-                .body(calculatorService.calculateBmi(bmiParameters));
+                .body(calculatorService.calculateBMI(bmiParameters));
     }
 }

@@ -10,8 +10,8 @@ import pl.agh.edu.master_diet.core.model.shared.WeightRange;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CalculateBmiResponse {
+public class CalculateBMIResponse {
 
-    private Double bmi;
+    private Double userBMI;
     private WeightRange weightRange;
 }

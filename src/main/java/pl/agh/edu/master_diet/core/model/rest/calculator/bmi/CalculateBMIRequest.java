@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.core.model.shared;
+package pl.agh.edu.master_diet.core.model.rest.calculator.bmi;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BmiParameters {
+public class CalculateBMIRequest {
 
     private Double weight;
     private Integer height;
