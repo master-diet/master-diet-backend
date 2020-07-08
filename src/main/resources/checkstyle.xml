@@ -161,7 +161,9 @@
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
         <module name="LeftCurly"/>
-        <module name="NeedBraces"/>
+        <module name="NeedBraces">
+            <property name="severity" value="warning"/>
+        </module>
         <module name="RightCurly"/>
         <module name="NestedIfDepth">
             <property name="max" value="3"/>
