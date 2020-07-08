@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Product;
+import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.product_browser.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
@@ -17,6 +18,7 @@ public final class ConversionServiceImpl implements ConversionService {
     private final UserParametersConverter userParametersConverter;
     private final UserPlanConverter userPlanConverter;
     private final ProductConverter productConverter;
+    private final RecentProductConverter recentProductConverter;
 
     @Override
     public UserParameters convert(UserParametersRequest request) {
@@ -31,5 +33,10 @@ public final class ConversionServiceImpl implements ConversionService {
     @Override
     public BaseProductInfo convert(Product product) {
         return productConverter.createFrom(product);
+    }
+
+    @Override
+    public BaseProductInfo convert(RecentProduct recentProduct) {
+        return recentProductConverter.createFrom(recentProduct);
     }
 }

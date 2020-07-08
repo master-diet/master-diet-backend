@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Product;
+import pl.agh.edu.master_diet.core.model.database.RecentProduct;
+import pl.agh.edu.master_diet.core.model.rest.product_browser.GetRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.product_browser.ProductSearchResponse;
 import pl.agh.edu.master_diet.repository.ProductRepository;
+import pl.agh.edu.master_diet.repository.RecentProductsRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ public class ProductBrowserService {
     private static final int ALLOW_SINGLE_TYPO_MINIMUM_WORD_LENGTH = 5;
 
     private final ProductRepository productRepository;
+    private final RecentProductsRepository recentProductsRepository;
     private final ConversionService conversionService;
 
     public ProductSearchResponse searchProducts(String searchTerm, Integer pageIndex, Integer perPage) {
@@ -34,9 +38,22 @@ public class ProductBrowserService {
         }
 
         Integer maximumPageNumber = calculateMaximumPageNumber(result, perPage);
-        result = adjustResultListToPageInfo(result, pageIndex, perPage);
+        result = adjustListToPageInfo(result, pageIndex, perPage);
 
         return ProductSearchResponse.builder()
+                .products(result.stream()
+                        .map(conversionService::convert)
+                        .collect(Collectors.toList()))
+                .maximumPageNumber(maximumPageNumber)
+                .build();
+    }
+
+    public GetRecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
+        List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
+        Integer maximumPageNumber = calculateMaximumPageNumber(result, perPage);
+        result = adjustListToPageInfo(result, pageIndex, perPage);
+
+        return GetRecentProductsResponse.builder()
                 .products(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
@@ -65,13 +82,13 @@ public class ProductBrowserService {
         return searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
     }
 
-    private Integer calculateMaximumPageNumber(List<Product> result, Integer perPage) {
-        return (int) Math.ceil((double) result.size() / perPage);
+    private Integer calculateMaximumPageNumber(List<?> pageableObjects, Integer perPage) {
+        return (int) Math.ceil((double) pageableObjects.size() / perPage);
     }
 
-    private List<Product> adjustResultListToPageInfo(List<Product> products, Integer pageIndex, Integer perPage) {
+    private <T> List<T> adjustListToPageInfo(List<T> pageableObjects, Integer pageIndex, Integer perPage) {
         int startIndex = (pageIndex - 1) * perPage;
-        int endIndex = Math.min(products.size(), pageIndex * perPage);
-        return products.subList(startIndex, endIndex);
+        int endIndex = Math.min(pageableObjects.size(), pageIndex * perPage);
+        return pageableObjects.subList(startIndex, endIndex);
     }
 }
