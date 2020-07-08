@@ -74,10 +74,12 @@ public class ProductBrowserService {
     }
 
     private String prepareSearchTermForTypoAtIndex(String searchTerm, int typoIndex) {
-        if (typoIndex == 0)
+        if (typoIndex == 0) {
             return searchTerm.substring(1);
-        if (typoIndex == searchTerm.length() - 1)
+        }
+        if (typoIndex == searchTerm.length() - 1) {
             return searchTerm.substring(0, searchTerm.length() - 1);
+        }
 
         return searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
     }

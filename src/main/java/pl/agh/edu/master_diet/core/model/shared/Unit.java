@@ -16,8 +16,9 @@ public enum Unit {
     public static Unit fromSymbol(String symbol) {
         symbol = symbol.trim().toLowerCase();
         for (Unit unit : Unit.values()) {
-            if (unit.getSymbol().equals(symbol))
+            if (unit.getSymbol().equals(symbol)) {
                 return unit;
+            }
         }
         throw new UnitSymbolNotFoundException(symbol);
     }
