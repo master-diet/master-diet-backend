@@ -64,7 +64,8 @@ public class ProductBrowserService {
     private List<Product> searchProductsForTermWithTypo(String searchTerm) {
         Set<Product> products = new LinkedHashSet<>();
         String searchTermForTypoAtTheBeginning = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm, 0);
-        String searchTermForTypoAtTheEnd = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm, searchTerm.length() - 1);
+        String searchTermForTypoAtTheEnd = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm,
+                searchTerm.length() - 1);
         products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheBeginning));
         products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheEnd));
 
