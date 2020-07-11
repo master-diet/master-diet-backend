@@ -63,8 +63,8 @@ public class ProductBrowserService {
 
     private List<Product> searchProductsForTermWithTypo(String searchTerm) {
         Set<Product> products = new LinkedHashSet<>();
-        String searchTermForTypoAtTheBeginning = prepareSearchTermForTypoAtIndex(searchTerm, 0);
-        String searchTermForTypoAtTheEnd = prepareSearchTermForTypoAtIndex(searchTerm, searchTerm.length() - 1);
+        String searchTermForTypoAtTheBeginning = prepareSqlSearchPatternWithTypoAtSelectedIndex(searchTerm, 0);
+        String searchTermForTypoAtTheEnd = prepareSqlSearchPatternWithTypoAtSelectedIndex(searchTerm, searchTerm.length() - 1);
         products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheBeginning));
         products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheEnd));
 
@@ -73,7 +73,7 @@ public class ProductBrowserService {
         return result;
     }
 
-    private String prepareSearchTermForTypoAtIndex(String searchTerm, int typoIndex) {
+    private String prepareSqlSearchPatternWithTypoAtSelectedIndex(String searchTerm, int typoIndex) {
         String result;
         if (typoIndex == 0) {
             result = searchTerm.substring(1);
