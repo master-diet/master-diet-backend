@@ -1,0 +1,38 @@
+{
+  "info": {
+    "_postman_id": "49e6973b-ecf2-4c65-9f5c-a8b614aa79e7",
+    "name": "master-diet",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CalculateBmi",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"weight\": \"80\",\n\t\"height\": \"175\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/{{calculator}}/{{bmi}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "{{calculator}}",
+            "{{bmi}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
