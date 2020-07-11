@@ -29,7 +29,7 @@ public class ProductBrowserService {
 
     public ProductSearchResponse searchProducts(String searchTerm, Integer pageIndex, Integer perPage) {
         searchTerm = searchTerm.trim().toLowerCase();
-        List<Product> result = productRepository.findBySearchTerm(searchTerm);
+        List<Product> result = productRepository.findBySearchTerm("%" + searchTerm + "%");
 
         if (searchTerm.length() >= ALLOW_SINGLE_TYPO_MINIMUM_WORD_LENGTH) {
             List<Product> productsForSearchTermWithTypo = searchProductsForTermWithTypo(searchTerm);
@@ -63,10 +63,10 @@ public class ProductBrowserService {
 
     private List<Product> searchProductsForTermWithTypo(String searchTerm) {
         Set<Product> products = new LinkedHashSet<>();
-        for (int typoIndex = 0; typoIndex < searchTerm.length(); typoIndex++) {
-            String searchTermForTypo = prepareSearchTermForTypoAtIndex(searchTerm, typoIndex);
-            products.addAll(productRepository.findBySearchTerm(searchTermForTypo));
-        }
+        String searchTermForTypoAtTheBeginning = prepareSearchTermForTypoAtIndex(searchTerm, 0);
+        String searchTermForTypoAtTheEnd = prepareSearchTermForTypoAtIndex(searchTerm, searchTerm.length() - 1);
+        products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheBeginning));
+        products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheEnd));
 
         List<Product> result = new ArrayList<>(products);
         result.sort((p1, p2) -> p2.getApprovals() - p1.getApprovals());
@@ -74,14 +74,15 @@ public class ProductBrowserService {
     }
 
     private String prepareSearchTermForTypoAtIndex(String searchTerm, int typoIndex) {
+        String result;
         if (typoIndex == 0) {
-            return searchTerm.substring(1);
+            result = searchTerm.substring(1);
+        } else if (typoIndex == searchTerm.length() - 1) {
+            result = searchTerm.substring(0, searchTerm.length() - 1);
+        } else {
+            result = searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
         }
-        if (typoIndex == searchTerm.length() - 1) {
-            return searchTerm.substring(0, searchTerm.length() - 1);
-        }
-
-        return searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
+        return "%" + result.toLowerCase() + "%";
     }
 
     private Integer calculateMaximumPageNumber(List<?> pageableObjects, Integer perPage) {

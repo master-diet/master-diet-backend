@@ -12,11 +12,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "product")
+@Table(name = "product",
+        indexes = {
+                @Index(columnList = "name", name = "name_index")
+        })
 @Getter
 @Setter
 @Builder

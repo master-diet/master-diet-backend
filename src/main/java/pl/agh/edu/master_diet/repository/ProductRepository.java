@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT P FROM Product P " +
-            "WHERE LOWER(P.name) LIKE LOWER(concat('%', concat(?1, '%')))" +
+            "WHERE LOWER(P.name) LIKE ?1 " +
             "ORDER BY P.approvals DESC")
     List<Product> findBySearchTerm(String searchTerm);
 }
