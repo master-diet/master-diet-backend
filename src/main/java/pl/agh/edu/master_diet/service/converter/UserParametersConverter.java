@@ -1,7 +1,7 @@
 package pl.agh.edu.master_diet.service.converter;
 
 import org.springframework.stereotype.Component;
-import pl.agh.edu.master_diet.core.model.rest.userPlan.UserParametersRequest;
+import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 
 @Component

@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.core.model.rest.userPlan;
+package pl.agh.edu.master_diet.core.model.rest.product_browser;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,26 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import pl.agh.edu.master_diet.core.model.shared.Unit;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserPlanResponse {
+public class BaseProductInfo {
 
     @NonNull
-    private Long userId;
+    private Long id;
 
     @NonNull
-    private Integer calories;
+    private String name;
 
     @NonNull
-    private Integer proteins;
+    private Long defaultValue;
 
     @NonNull
-    private Integer fat;
+    private Unit unit;
 
     @NonNull
-    private Integer carbohydrates;
+    private Long calories;
 }
