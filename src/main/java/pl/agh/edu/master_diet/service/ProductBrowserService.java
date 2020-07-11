@@ -29,7 +29,7 @@ public class ProductBrowserService {
 
     public ProductSearchResponse searchProducts(String searchTerm, Integer pageIndex, Integer perPage) {
         searchTerm = searchTerm.trim().toLowerCase();
-        List<Product> result = productRepository.findBySearchTerm("%" + searchTerm + "%");
+        List<Product> result = productRepository.findBySearchTerm(searchTerm);
 
         if (searchTerm.length() >= ALLOW_SINGLE_TYPO_MINIMUM_WORD_LENGTH) {
             List<Product> productsForSearchTermWithTypo = searchProductsForTermWithTypo(searchTerm);
@@ -63,8 +63,8 @@ public class ProductBrowserService {
 
     private List<Product> searchProductsForTermWithTypo(String searchTerm) {
         Set<Product> products = new LinkedHashSet<>();
-        String searchTermForTypoAtTheBeginning = prepareSqlSearchPatternWithTypoAtSelectedIndex(searchTerm, 0);
-        String searchTermForTypoAtTheEnd = prepareSqlSearchPatternWithTypoAtSelectedIndex(searchTerm, searchTerm.length() - 1);
+        String searchTermForTypoAtTheBeginning = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm, 0);
+        String searchTermForTypoAtTheEnd = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm, searchTerm.length() - 1);
         products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheBeginning));
         products.addAll(productRepository.findBySearchTerm(searchTermForTypoAtTheEnd));
 
@@ -73,7 +73,7 @@ public class ProductBrowserService {
         return result;
     }
 
-    private String prepareSqlSearchPatternWithTypoAtSelectedIndex(String searchTerm, int typoIndex) {
+    private String prepareSearchPatternWithTypoAtSelectedIndex(String searchTerm, int typoIndex) {
         String result;
         if (typoIndex == 0) {
             result = searchTerm.substring(1);
@@ -82,7 +82,7 @@ public class ProductBrowserService {
         } else {
             result = searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
         }
-        return "%" + result.toLowerCase() + "%";
+        return result.toLowerCase();
     }
 
     private Integer calculateMaximumPageNumber(List<?> pageableObjects, Integer perPage) {
