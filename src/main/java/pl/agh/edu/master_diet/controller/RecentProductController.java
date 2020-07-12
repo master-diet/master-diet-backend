@@ -1,6 +1,7 @@
 package pl.agh.edu.master_diet.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequestMapping("/diary")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,10 +25,11 @@ public class RecentProductController {
     private final ConversionService conversionService;
     private final RecentProductService recentProductService;
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<AddRecentProductResponse> addRecentProduct(
             @Valid @RequestBody final AddRecentProductRequest request
     ) {
+        log.info("Attempt to add recent product");
         final RecentProductParameters recentProductParameters = conversionService.convert(request);
         return ResponseEntity.ok()
                 .body(recentProductService.addRecentProduct(recentProductParameters));

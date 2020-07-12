@@ -15,6 +15,7 @@ public class RecentProductParameters {
     private MealType mealType;
     private Float amount;
     private Float portion;
+    private Unit portionUnit;
     private Long userId;
     private Long productId;
 }
