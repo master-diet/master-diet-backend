@@ -1,5 +1,6 @@
 package pl.agh.edu.master_diet.controller;
 
+import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class GamificationController {
     private final GamificationService GamificationService;
 
     @PostMapping
-    public void addPoints(@RequestBody PointsRequest request) {
-        GamificationService.addPointsToUser(request.getUserId(),request.getPoints());
+    public void addPoints(@RequestBody PointsRequest request) throws NotFoundException {
+        GamificationService.addPointsToUser(request.getUserId(), request.getPoints());
     }
 }
