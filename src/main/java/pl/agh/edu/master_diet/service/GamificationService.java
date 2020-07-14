@@ -18,7 +18,7 @@ public class GamificationService {
                 .orElseThrow(() -> new NotFoundException(String.format("User detail with id %d not found", userId)));
         Integer currentPoints = userGamificationDetail.getPoints();
         Integer newPoints = currentPoints + points;
-        userGamificationDetail.setLevel(newPoints);
+        userGamificationDetail.setPoints(newPoints);
         userGamificationDetailRepository.save(userGamificationDetail);
     }
 }

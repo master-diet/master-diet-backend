@@ -1,5 +1,7 @@
 package pl.agh.edu.master_diet.core.model.database;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonBackReference;
 
@@ -12,6 +14,9 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class UserGamificationDetail {
 
     @Id
