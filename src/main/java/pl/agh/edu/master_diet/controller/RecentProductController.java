@@ -27,8 +27,8 @@ public class RecentProductController {
 
     @PostMapping("/add")
     public ResponseEntity<AddRecentProductResponse> addRecentProduct(
-            @Valid @RequestBody final AddRecentProductRequest request
-    ) {
+            @Valid @RequestBody final AddRecentProductRequest request) {
+
         log.info("Attempt to add recent product");
         final RecentProductParameters recentProductParameters = conversionService.convert(request);
         return ResponseEntity.ok()

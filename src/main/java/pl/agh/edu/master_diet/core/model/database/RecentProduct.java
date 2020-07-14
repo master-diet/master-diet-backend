@@ -34,8 +34,8 @@ public class RecentProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime auditDate;
+    @Column(nullable = false)
+    private LocalDateTime mealTime;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Product;
 import pl.agh.edu.master_diet.core.model.database.RecentProduct;
+import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
@@ -36,11 +37,6 @@ public final class ConversionServiceImpl implements ConversionService {
     }
 
     @Override
-    public RecentProductParameters convert(AddRecentProductRequest request) {
-        return recentProductConverter.createFrom(request);
-    }
-
-    @Override
     public BMIParameters convert(CalculateBMIRequest request) {
         return userBMIConverter.createFrom(request);
     }
@@ -51,7 +47,17 @@ public final class ConversionServiceImpl implements ConversionService {
     }
 
     @Override
+    public RecentProductParameters convert(AddRecentProductRequest request) {
+        return recentProductConverter.createFrom(request);
+    }
+
+    @Override
     public BaseProductInfo convert(RecentProduct recentProduct) {
         return recentProductConverter.createFrom(recentProduct);
+    }
+
+    @Override
+    public RecentProduct convert(RecentProductParameters parameters, Product product, User user) {
+        return recentProductConverter.createFrom(parameters, product, user);
     }
 }

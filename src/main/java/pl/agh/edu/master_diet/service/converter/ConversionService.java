@@ -2,6 +2,7 @@ package pl.agh.edu.master_diet.service.converter;
 
 import pl.agh.edu.master_diet.core.model.database.Product;
 import pl.agh.edu.master_diet.core.model.database.RecentProduct;
+import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
@@ -25,4 +26,6 @@ public interface ConversionService {
     BaseProductInfo convert(Product product);
 
     BaseProductInfo convert(RecentProduct recentProduct);
+
+    RecentProduct convert(RecentProductParameters parameters, Product product, User user);
 }

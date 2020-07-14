@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class RecentProductParameters {
 
     private MealType mealType;
+    private LocalDateTime mealTime;
     private Float amount;
     private Float portion;
     private Unit portionUnit;
