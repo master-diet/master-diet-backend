@@ -11,5 +11,4 @@ public class PointsRequest {
 
     @NonNull
     private Integer points;
-
 }
