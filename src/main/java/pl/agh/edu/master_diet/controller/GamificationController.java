@@ -15,10 +15,10 @@ import pl.agh.edu.master_diet.service.GamificationService;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GamificationController {
 
-    private final GamificationService GamificationService;
+    private final GamificationService gamificationService;
 
     @PostMapping
     public void addPoints(@RequestBody PointsRequest request) throws NotFoundException {
-        GamificationService.addPointsToUser(request.getUserId(), request.getPoints());
+        gamificationService.addPointsToUser(request.getUserId(), request.getPoints());
     }
 }
