@@ -9,6 +9,7 @@ import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
+import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductResponse;
 import pl.agh.edu.master_diet.core.model.rest.product_browser.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
@@ -59,5 +60,10 @@ public final class ConversionServiceImpl implements ConversionService {
     @Override
     public RecentProduct convert(RecentProductParameters parameters, Product product, User user) {
         return recentProductConverter.createFrom(parameters, product, user);
+    }
+
+    @Override
+    public SingleRecentProductResponse convertProduct(RecentProduct product) {
+        return recentProductConverter.createFromProduct(product);
     }
 }

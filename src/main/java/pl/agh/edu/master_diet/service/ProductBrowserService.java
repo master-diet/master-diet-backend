@@ -8,7 +8,7 @@ import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 import pl.agh.edu.master_diet.core.model.rest.product_browser.GetRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.product_browser.ProductSearchResponse;
 import pl.agh.edu.master_diet.repository.ProductRepository;
-import pl.agh.edu.master_diet.repository.RecentProductsRepository;
+import pl.agh.edu.master_diet.repository.RecentProductRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ProductBrowserService {
     private static final int ALLOW_SINGLE_TYPO_MINIMUM_WORD_LENGTH = 5;
 
     private final ProductRepository productRepository;
-    private final RecentProductsRepository recentProductsRepository;
+    private final RecentProductRepository recentProductRepository;
     private final ConversionService conversionService;
 
     public ProductSearchResponse searchProducts(String searchTerm, Integer pageIndex, Integer perPage) {
@@ -49,7 +49,7 @@ public class ProductBrowserService {
     }
 
     public GetRecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
-        List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
+        List<RecentProduct> result = recentProductRepository.findByUserId(userId);
         Integer maximumPageNumber = calculateMaximumPageNumber(result, perPage);
         result = adjustListToPageInfo(result, pageIndex, perPage);
 
