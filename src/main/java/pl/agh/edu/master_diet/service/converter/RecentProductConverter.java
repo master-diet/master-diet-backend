@@ -32,7 +32,6 @@ public final class RecentProductConverter
                 .portion(request.getPortion())
                 .portionUnit(request.getPortionUnit())
                 .productId(request.getProductId())
-                .userId(request.getUserId())
                 .build();
     }
 

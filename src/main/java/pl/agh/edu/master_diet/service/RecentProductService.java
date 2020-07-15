@@ -20,8 +20,9 @@ public class RecentProductService {
     private final ProductService productService;
     private final ConversionService conversionService;
 
-    public AddRecentProductResponse addRecentProduct(final RecentProductParameters parameters) {
-        final User user = userService.getUserById(parameters.getUserId());
+    public AddRecentProductResponse addRecentProduct(final RecentProductParameters parameters,
+                                                     final Long userId) {
+        final User user = userService.getUserById(userId);
         final Product product = productService.getProductById(parameters.getProductId());
 
         final RecentProduct recentProduct = conversionService.convert(parameters, product, user);
@@ -32,9 +33,6 @@ public class RecentProductService {
                 .mealType(parameters.getMealType())
                 .portion(parameters.getPortion())
                 .portionUnit(parameters.getPortionUnit())
-                .productId(parameters.getProductId())
-                .userId(parameters.getUserId())
-                .success(true)
                 .build();
     }
 }

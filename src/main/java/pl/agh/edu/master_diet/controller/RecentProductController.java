@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductResponse;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
+import pl.agh.edu.master_diet.security.CurrentUser;
+import pl.agh.edu.master_diet.security.UserPrincipal;
 import pl.agh.edu.master_diet.service.RecentProductService;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
@@ -27,11 +29,12 @@ public class RecentProductController {
 
     @PostMapping("/add")
     public ResponseEntity<AddRecentProductResponse> addRecentProduct(
-            @Valid @RequestBody final AddRecentProductRequest request) {
+            @Valid @RequestBody final AddRecentProductRequest request,
+            @CurrentUser final UserPrincipal userPrincipal) {
 
         log.info("Attempt to add recent product");
         final RecentProductParameters recentProductParameters = conversionService.convert(request);
         return ResponseEntity.ok()
-                .body(recentProductService.addRecentProduct(recentProductParameters));
+                .body(recentProductService.addRecentProduct(recentProductParameters, userPrincipal.getId()));
     }
 }
