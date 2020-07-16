@@ -23,6 +23,11 @@ public class SingleRecentProductResponse {
 
     private Float amount;
     private Float portion;
-    private Unit portionUnit;
-    private Long productId;
+    private Unit mealUnit;
+    private String productName;
+    private Float caloriesEaten;
+    private Float proteinsEaten;
+    private Float fatEaten;
+    private Float carbohydratesEaten;
+    private Long recentProductId;
 }

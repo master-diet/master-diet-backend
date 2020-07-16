@@ -15,6 +15,7 @@ import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
@@ -47,16 +48,43 @@ public class RecentProductService {
                                                              final Long userId) {
         final User user = userService.getUserById(userId);
 
-        final List<RecentProduct> recentProductsForDate = recentProductRepository
-                .findByUserAndMealTime_Date(user, date);
+        final List<RecentProduct> recentProducts = recentProductRepository
+                .findByUserAndMealTimeDate(user.getId(), date);
 
-        final List<SingleRecentProductResponse> recentProductsResponse = recentProductsForDate.stream()
-                .map(conversionService::convertProduct)
+        final List<SingleRecentProductResponse> responseList = recentProducts.stream()
+                .map(this::createSingleResponseForProduct)
                 .collect(toList());
 
         return MultipleRecentProductsResponse.builder()
-                .recentProducts(recentProductsResponse)
+                .recentProducts(responseList)
                 .build();
     }
+
+    private SingleRecentProductResponse createSingleResponseForProduct(RecentProduct recentProduct) {
+        final Product product = productService.getProductById(recentProduct.getProduct().getId());
+
+        if (!Objects.equals(product.getUnit(), recentProduct.getPortionUnit())) {
+            throw new RuntimeException("Unit of product and recent product is not the same");
+            // TODO to be handled in the future
+        }
+
+        final Float weightEaten = recentProduct.getAmount() * recentProduct.getPortion();
+        final Float coefficient = weightEaten / product.getDefaultValue();
+
+        return SingleRecentProductResponse.builder()
+                .mealUnit(recentProduct.getPortionUnit())
+                .fatEaten(coefficient * product.getFat())
+                .caloriesEaten(coefficient * product.getCalories())
+                .proteinsEaten(coefficient * product.getProteins())
+                .carbohydratesEaten(coefficient * product.getCarbohydrates())
+                .mealTime(recentProduct.getMealTime())
+                .recentProductId(recentProduct.getId())
+                .portion(recentProduct.getPortion())
+                .amount(recentProduct.getAmount())
+                .mealType(recentProduct.getMealType())
+                .productName(product.getName())
+                .build();
+    }
+
 
 }
