@@ -13,7 +13,7 @@ public class PageFittingService<T> {
         return pageableObjects.subList(startIndex, endIndex);
     }
 
-    public Integer calculateMaximumPageNumber(List<?> pageableObjects, Integer perPage) {
+    public Integer calculateMaximumPageNumber(List<T> pageableObjects, Integer perPage) {
         return (int) Math.ceil((double) pageableObjects.size() / perPage);
     }
 }

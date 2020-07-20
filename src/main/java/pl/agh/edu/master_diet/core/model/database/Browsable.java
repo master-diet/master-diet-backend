@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.service.converter;
+package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public abstract class Browsable {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer approvals;
 
 }

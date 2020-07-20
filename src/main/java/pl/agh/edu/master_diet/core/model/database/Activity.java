@@ -2,7 +2,9 @@ package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "activity")
@@ -11,11 +13,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Activity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Activity extends Browsable {
 
     @Column(nullable = false)
     private String code;
@@ -25,8 +23,5 @@ public class Activity {
 
     @Column(nullable = false)
     private String category;
-
-    @Column(nullable = false)
-    private String name;
 
 }

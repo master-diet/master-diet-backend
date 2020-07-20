@@ -1,7 +1,7 @@
 package pl.agh.edu.master_diet.service;
 
+import pl.agh.edu.master_diet.core.model.database.Browsable;
 import pl.agh.edu.master_diet.repository.BrowserRepository;
-import pl.agh.edu.master_diet.service.converter.Browsable;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

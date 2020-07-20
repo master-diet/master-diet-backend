@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.core.model.rest.product_browser;
+package pl.agh.edu.master_diet.core.model.rest.browser.product;
 
 import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.Unit;

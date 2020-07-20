@@ -2,7 +2,6 @@ package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.Unit;
-import pl.agh.edu.master_diet.service.converter.Browsable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
