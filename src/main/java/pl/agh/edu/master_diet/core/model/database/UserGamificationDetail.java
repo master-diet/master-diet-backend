@@ -1,5 +1,7 @@
 package pl.agh.edu.master_diet.core.model.database;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonBackReference;
 
@@ -12,18 +14,24 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class UserGamificationDetail {
 
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer points;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private Integer level;
+
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer cheatTokens;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "int default 0")
     private Integer completeCondition;
 
     @OneToOne
@@ -32,6 +40,6 @@ public class UserGamificationDetail {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "daily_challenge_id", nullable = false)
+    @JoinColumn(name = "daily_challenge_id")
     private DailyChallenge dailyChallenge;
 }

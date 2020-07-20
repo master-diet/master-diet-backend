@@ -30,5 +30,5 @@ public class LevelThreshold {
     private Integer level;
 
     @Column(nullable = false)
-    private Integer threshold;
+    private Integer thresholdRoof;
 }
