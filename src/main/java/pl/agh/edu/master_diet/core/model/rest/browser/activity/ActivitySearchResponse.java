@@ -11,6 +11,6 @@ import java.util.List;
 @Builder
 public class ActivitySearchResponse {
 
-    private List<BaseActivityInfo> activityInfos;
+    private List<BaseActivityInfo> activities;
     private Integer maximumPageNumber;
 }

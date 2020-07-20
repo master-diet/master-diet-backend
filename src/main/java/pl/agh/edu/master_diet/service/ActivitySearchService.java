@@ -26,7 +26,7 @@ public class ActivitySearchService extends SearchService<Activity> {
     public ActivitySearchResponse searchActivity(String searchTerm, Integer pageIndex, Integer perPage) {
         SearchResult<Activity> searchResult = searchBrowsable(searchTerm, pageIndex, perPage);
         return ActivitySearchResponse.builder()
-                .activityInfos(searchResult.getResult().stream()
+                .activities(searchResult.getResult().stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
                 .maximumPageNumber(searchResult.getMaximumPage())

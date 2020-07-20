@@ -12,7 +12,7 @@ import java.util.List;
 public class RecentActivityResponse {
 
     @NonNull
-    private List<BaseActivityInfo> activityInfos;
+    private List<BaseActivityInfo> activities;
 
     @NonNull
     private Integer maximumPageNumber;

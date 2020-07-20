@@ -30,7 +30,7 @@ public class RecentSearchedService {
         result = userActivityPageFittingService.adjustListToPageInfo(result, pageIndex, perPage);
 
         return RecentActivityResponse.builder()
-                .activityInfos(result.stream()
+                .activities(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
                 .maximumPageNumber(maximumPageNumber)
