@@ -18,16 +18,15 @@ public class Activity {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
-
-    private String description;
+    private String code;
 
     @Column(nullable = false)
-    private Double burnedCalories;
+    private Double mets;
 
-    private Integer defaultReps;
+    @Column(nullable = false)
+    private String category;
 
-    private Integer defaultSets;
+    @Column(nullable = false)
+    private String name;
 
-    private Double defaultTime;
 }

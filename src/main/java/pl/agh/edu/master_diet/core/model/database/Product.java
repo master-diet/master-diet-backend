@@ -1,17 +1,11 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.Unit;
+import pl.agh.edu.master_diet.service.converter.Browsable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
@@ -26,11 +20,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Product extends Browsable {
 
     @Pattern(regexp = "[\\d]+")
     private String barcode;
@@ -38,16 +28,13 @@ public class Product {
     @Column(nullable = false)
     private Float defaultValue;
 
-    @Column(nullable = false)
-    private String name;
-
     private String notes;
 
     @Column(nullable = false)
     private Unit unit;
 
     @Column(nullable = false)
-    private Float calories;
+    private Long calories;
 
     @Column(nullable = false)
     private Float proteins;
@@ -58,6 +45,4 @@ public class Product {
     @Column(nullable = false)
     private Float carbohydrates;
 
-    @Column(nullable = false)
-    private Integer approvals;
 }
