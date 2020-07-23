@@ -7,6 +7,7 @@ import pl.agh.edu.master_diet.core.model.database.Product;
 import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductResponse;
+import pl.agh.edu.master_diet.core.model.rest.diary.DeleteRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductResponse;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
@@ -57,6 +58,16 @@ public class RecentProductService {
 
         return MultipleRecentProductsResponse.builder()
                 .recentProducts(responseList)
+                .build();
+    }
+
+    public DeleteRecentProductsResponse deleteRecentProducts(final List<Long> recentProductsIds,
+                                                             final Long userId) {
+        recentProductsIds.forEach(
+                recentProductId -> recentProductRepository.deleteByUserIdAndId(userId, recentProductId));
+
+        return DeleteRecentProductsResponse.builder()
+                .recentProductsIds(recentProductsIds)
                 .build();
     }
 

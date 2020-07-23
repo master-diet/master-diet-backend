@@ -5,15 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
-import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductResponse;
-import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
+import org.springframework.web.bind.annotation.*;
+import pl.agh.edu.master_diet.core.model.rest.diary.*;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
@@ -52,4 +45,16 @@ public class RecentProductController {
         return ResponseEntity.ok()
                 .body(recentProductService.getProductsForDate(date, userPrincipal.getId()));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<DeleteRecentProductsResponse> deleteRecentProducts(
+            @Valid @RequestBody final DeleteRecentProductsRequest request,
+            @CurrentUser final UserPrincipal userPrincipal) {
+
+        log.info("Attempt to delete recent products");
+        return ResponseEntity.ok()
+                .body(recentProductService
+                        .deleteRecentProducts(request.getRecentProductsIds(), userPrincipal.getId()));
+    }
+
 }
