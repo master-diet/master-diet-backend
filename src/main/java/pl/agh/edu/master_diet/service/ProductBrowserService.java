@@ -37,27 +37,27 @@ public class ProductBrowserService {
             result.addAll(productsForSearchTermWithTypo);
         }
 
-        Integer maximumPageNumber = calculateMaximumPageNumber(result, perPage);
-        result = adjustListToPageInfo(result, pageIndex, perPage);
+        Integer totalNumberOfProducts = result.size();
+        result = adjustListToPageSize(result, pageIndex, perPage);
 
         return ProductSearchResponse.builder()
                 .products(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
-                .maximumPageNumber(maximumPageNumber)
+                .totalNumberOfProducts(totalNumberOfProducts)
                 .build();
     }
 
     public GetRecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
         List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
-        Integer maximumPageNumber = calculateMaximumPageNumber(result, perPage);
-        result = adjustListToPageInfo(result, pageIndex, perPage);
+        Integer totalNumberOfProducts = result.size();
+        result = adjustListToPageSize(result, pageIndex, perPage);
 
         return GetRecentProductsResponse.builder()
                 .products(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
-                .maximumPageNumber(maximumPageNumber)
+                .totalNumberOfProducts(totalNumberOfProducts)
                 .build();
     }
 
@@ -86,11 +86,7 @@ public class ProductBrowserService {
         return result.toLowerCase();
     }
 
-    private Integer calculateMaximumPageNumber(List<?> pageableObjects, Integer perPage) {
-        return (int) Math.ceil((double) pageableObjects.size() / perPage);
-    }
-
-    private <T> List<T> adjustListToPageInfo(List<T> pageableObjects, Integer pageIndex, Integer perPage) {
+    private <T> List<T> adjustListToPageSize(List<T> pageableObjects, Integer pageIndex, Integer perPage) {
         int startIndex = (pageIndex - 1) * perPage;
         int endIndex = Math.min(pageableObjects.size(), pageIndex * perPage);
         return pageableObjects.subList(startIndex, endIndex);
