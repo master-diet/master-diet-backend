@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.*;
+import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 import pl.agh.edu.master_diet.core.model.rest.browser.activity.BaseActivityInfo;
 import pl.agh.edu.master_diet.core.model.rest.browser.product.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
@@ -11,6 +12,7 @@ import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.BMIParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
+import pl.agh.edu.master_diet.service.AchievementConverter;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,6 +25,8 @@ public final class ConversionServiceImpl implements ConversionService {
     private final RecentProductConverter recentProductConverter;
     private final ActivityConverter activityConverter;
     private final UserActivityConverter userActivityConverter;
+    private final UserAchievementConverter userAchievementConverter;
+    private final AchievementConverter achievementConverter;
 
     @Override
     public UserParameters convert(UserParametersRequest request) {
@@ -57,5 +61,15 @@ public final class ConversionServiceImpl implements ConversionService {
     @Override
     public BaseActivityInfo convert(UserActivity userActivity) {
         return userActivityConverter.createFrom(userActivity);
+    }
+
+    @Override
+    public AchievementsResponse convert(UserAchievement userAchievement) {
+        return userAchievementConverter.createFrom(userAchievement);
+    }
+
+    @Override
+    public AchievementsResponse convert(Achievement achievement) {
+        return achievementConverter.createFrom(achievement);
     }
 }

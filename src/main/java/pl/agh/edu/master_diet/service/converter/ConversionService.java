@@ -1,6 +1,7 @@
 package pl.agh.edu.master_diet.service.converter;
 
 import pl.agh.edu.master_diet.core.model.database.*;
+import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 import pl.agh.edu.master_diet.core.model.rest.browser.activity.BaseActivityInfo;
 import pl.agh.edu.master_diet.core.model.rest.browser.product.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
@@ -24,4 +25,8 @@ public interface ConversionService {
     BaseActivityInfo convert(Activity activity);
 
     BaseActivityInfo convert(UserActivity userActivity);
+
+    AchievementsResponse convert(UserAchievement userAchievement);
+
+    AchievementsResponse convert(Achievement achievement);
 }
