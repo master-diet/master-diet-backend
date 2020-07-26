@@ -20,5 +20,5 @@ public class GetRecentProductsResponse {
     private List<BaseProductInfo> products;
 
     @NonNull
-    private Integer maximumPageNumber;
+    private Integer totalNumberOfProducts;
 }
