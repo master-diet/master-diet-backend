@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 import pl.agh.edu.master_diet.core.model.shared.MealType;
+import pl.agh.edu.master_diet.core.model.shared.Unit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,9 +34,8 @@ public class RecentProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
-    @CreationTimestamp
-    private LocalDateTime auditDate;
+    @Column(nullable = false)
+    private LocalDateTime mealTime;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -47,6 +46,9 @@ public class RecentProduct {
 
     @Column(nullable = false)
     private Float portion;
+
+    @Column(nullable = false)
+    private Unit portionUnit;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

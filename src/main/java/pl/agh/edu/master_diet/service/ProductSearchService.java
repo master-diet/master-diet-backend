@@ -7,7 +7,7 @@ import pl.agh.edu.master_diet.core.model.rest.browser.product.ProductSearchRespo
 import pl.agh.edu.master_diet.core.model.rest.browser.product.RecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.ProductRepository;
-import pl.agh.edu.master_diet.repository.RecentProductsRepository;
+import pl.agh.edu.master_diet.repository.RecentProductRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.ArrayList;
@@ -20,17 +20,17 @@ import java.util.stream.Collectors;
 public class ProductSearchService extends SearchService<Product> {
 
     private final ConversionService conversionService;
-    private final RecentProductsRepository recentProductsRepository;
+    private final RecentProductRepository recentProductRepository;
     private final PageFittingService<RecentProduct> recentProductPageFittingService;
 
     public ProductSearchService(ConversionService conversionService,
                                 ProductRepository browserRepository,
                                 PageFittingService<Product> fittingService,
-                                RecentProductsRepository recentProductsRepository,
+                                RecentProductRepository recentProductRepository,
                                 PageFittingService<RecentProduct> recentProductPageFittingService) {
         super(browserRepository, fittingService);
         this.conversionService = conversionService;
-        this.recentProductsRepository = recentProductsRepository;
+        this.recentProductRepository = recentProductRepository;
         this.recentProductPageFittingService = recentProductPageFittingService;
     }
 
@@ -45,7 +45,7 @@ public class ProductSearchService extends SearchService<Product> {
     }
 
     public RecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
-        List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
+        List<RecentProduct> result = recentProductRepository.findByUserId(userId);
         result = removeDuplicatedRecentProducts(result);
         Integer totalNumberOfProducts = result.size();
         result = recentProductPageFittingService.adjustListToPageSize(result, pageIndex, perPage);

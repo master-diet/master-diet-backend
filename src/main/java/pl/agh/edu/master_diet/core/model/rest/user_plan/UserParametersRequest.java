@@ -13,6 +13,8 @@ import pl.agh.edu.master_diet.core.model.shared.Goal;
 
 import java.time.LocalDate;
 
+import static pl.agh.edu.master_diet.util.GlobalConstants.GLOBAL_DATE_FORMAT;
+
 @Getter
 @Setter
 @Builder
@@ -20,13 +22,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserParametersRequest {
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
-
     @NonNull
     private Long userId;
 
     @NonNull
-    @JsonFormat(pattern = DATE_FORMAT)
+    @JsonFormat(pattern = GLOBAL_DATE_FORMAT)
     private LocalDate birthDate;
 
     @NonNull
