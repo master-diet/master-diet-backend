@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product extends Browsed {
+public class Product extends AbstractBrowsed {
 
     @Pattern(regexp = "[\\d]+")
     private String barcode;
