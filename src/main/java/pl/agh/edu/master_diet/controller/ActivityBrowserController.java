@@ -11,7 +11,6 @@ import pl.agh.edu.master_diet.core.model.rest.browser.activity.RecentActivityRes
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
 import pl.agh.edu.master_diet.service.ActivitySearchService;
-import pl.agh.edu.master_diet.service.RecentSearchedService;
 
 @RestController
 @RequestMapping("/activity-browser")
@@ -19,7 +18,6 @@ import pl.agh.edu.master_diet.service.RecentSearchedService;
 public class ActivityBrowserController {
 
     private final ActivitySearchService activitySearchService;
-    private final RecentSearchedService recentSearchedService;
 
     @GetMapping
     public ActivitySearchResponse searchProduct(@RequestParam String searchTerm,
@@ -32,6 +30,6 @@ public class ActivityBrowserController {
     public RecentActivityResponse getRecentProducts(@RequestParam Integer pageIndex,
                                                     @RequestParam Integer perPage,
                                                     @CurrentUser final UserPrincipal userPrincipal) {
-        return recentSearchedService.getRecentActivities(pageIndex, perPage, userPrincipal.getId());
+        return activitySearchService.getRecentActivities(pageIndex, perPage, userPrincipal.getId());
     }
 }

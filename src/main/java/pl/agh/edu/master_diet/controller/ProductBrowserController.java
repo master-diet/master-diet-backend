@@ -11,7 +11,6 @@ import pl.agh.edu.master_diet.core.model.rest.browser.product.RecentProductsResp
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
 import pl.agh.edu.master_diet.service.ProductSearchService;
-import pl.agh.edu.master_diet.service.RecentSearchedService;
 
 @RestController
 @RequestMapping("/product-browser")
@@ -19,7 +18,6 @@ import pl.agh.edu.master_diet.service.RecentSearchedService;
 public class ProductBrowserController {
 
     private final ProductSearchService productSearchService;
-    private final RecentSearchedService recentSearchedService;
 
     @GetMapping
     public ProductSearchResponse searchProduct(@RequestParam String searchTerm,
@@ -32,7 +30,7 @@ public class ProductBrowserController {
     public RecentProductsResponse getRecentProducts(@RequestParam Integer pageIndex,
                                                     @RequestParam Integer perPage,
                                                     @CurrentUser final UserPrincipal userPrincipal) {
-        return recentSearchedService.getRecentProducts(pageIndex, perPage, userPrincipal.getId());
+        return productSearchService.getRecentProducts(pageIndex, perPage, userPrincipal.getId());
     }
 }
 
