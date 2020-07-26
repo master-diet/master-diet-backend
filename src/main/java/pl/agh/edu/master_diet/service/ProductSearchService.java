@@ -10,7 +10,10 @@ import pl.agh.edu.master_diet.repository.ProductRepository;
 import pl.agh.edu.master_diet.repository.RecentProductsRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,12 +40,13 @@ public class ProductSearchService extends SearchService<Product> {
                 .products(searchResult.getResult().stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
-                .maximumPageNumber(searchResult.getMaximumPage())
+                .totalNumberOfProducts(searchResult.getMaximumPage())
                 .build();
     }
 
     public RecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
         List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
+        result = removeDuplicatedRecentProducts(result);
         Integer maximumPageNumber = recentProductPageFittingService.calculateMaximumPageNumber(result, perPage);
         result = recentProductPageFittingService.adjustListToPageInfo(result, pageIndex, perPage);
 
@@ -52,5 +56,16 @@ public class ProductSearchService extends SearchService<Product> {
                         .collect(Collectors.toList()))
                 .maximumPageNumber(maximumPageNumber)
                 .build();
+    }
+
+    private List<RecentProduct> removeDuplicatedRecentProducts(List<RecentProduct> recentProducts) {
+        Set<Long> productIds = new HashSet<>();
+        List<RecentProduct> result = new ArrayList<>();
+        for (RecentProduct recentProduct : recentProducts) {
+            if (productIds.add(recentProduct.getProduct().getId())) {
+                result.add(recentProduct);
+            }
+        }
+        return result;
     }
 }
