@@ -1,16 +1,15 @@
 package pl.agh.edu.master_diet.service;
 
-import pl.agh.edu.master_diet.core.model.database.Browsable;
+import pl.agh.edu.master_diet.core.model.database.Browsed;
 import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.BrowserRepository;
 
 import java.util.List;
 
-public abstract class SearchService<Searched extends Browsable> {
+public abstract class SearchService<Searched extends Browsed> {
 
     private final BrowserService<Searched> browserService;
     private final PageFittingService<Searched> pageFittingService;
-
 
     public SearchService(BrowserRepository<Searched> browserRepository, PageFittingService<Searched> fittingService) {
         this.browserService = new BrowserService<>(browserRepository);
@@ -23,5 +22,4 @@ public abstract class SearchService<Searched extends Browsable> {
         searchedProducts = pageFittingService.adjustListToPageInfo(searchedProducts, pageIndex, perPage);
         return new SearchResult<>(searchedProducts, maximumPageNumber);
     }
-
 }

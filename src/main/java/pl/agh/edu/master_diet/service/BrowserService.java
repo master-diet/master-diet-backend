@@ -1,14 +1,14 @@
 package pl.agh.edu.master_diet.service;
 
-import pl.agh.edu.master_diet.core.model.database.Browsable;
+import pl.agh.edu.master_diet.core.model.database.Browsed;
 import pl.agh.edu.master_diet.repository.BrowserRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BrowserService<T extends Browsable> {
+public class BrowserService<T extends Browsed> {
 
     private static final int ALLOW_SINGLE_TYPO_MINIMUM_WORD_LENGTH = 5;
 
@@ -31,7 +31,7 @@ public class BrowserService<T extends Browsable> {
     }
 
     private List<T> searchProductsForTermWithTypo(String searchTerm) {
-        Set<T> products = new LinkedHashSet<>();
+        Set<T> products = new HashSet<>();
         String searchTermForTypoAtTheBeginning = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm, 0);
         String searchTermForTypoAtTheEnd = prepareSearchPatternWithTypoAtSelectedIndex(searchTerm,
                 searchTerm.length() - 1);

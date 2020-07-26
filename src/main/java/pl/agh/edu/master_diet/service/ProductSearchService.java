@@ -14,7 +14,8 @@ public class ProductSearchService extends SearchService<Product> {
 
     private final ConversionService conversionService;
 
-    public ProductSearchService(ConversionService conversionService, ProductRepository browserRepository,
+    public ProductSearchService(ConversionService conversionService,
+                                ProductRepository browserRepository,
                                 PageFittingService<Product> fittingService) {
         super(browserRepository, fittingService);
         this.conversionService = conversionService;

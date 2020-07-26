@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class ActivitySearchService extends SearchService<Activity> {
 
-
     private final ConversionService conversionService;
 
     @Autowired
-    public ActivitySearchService(ConversionService conversionService, ActivityRepository activityRepository,
+    public ActivitySearchService(ConversionService conversionService,
+                                 ActivityRepository activityRepository,
                                  PageFittingService<Activity> fittingService) {
         super(activityRepository, fittingService);
         this.conversionService = conversionService;
