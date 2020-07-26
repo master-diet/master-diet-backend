@@ -1,17 +1,15 @@
 package pl.agh.edu.master_diet.core.model.shared;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SearchResult<T> {
     private List<T> result;
     private Integer maximumPage;

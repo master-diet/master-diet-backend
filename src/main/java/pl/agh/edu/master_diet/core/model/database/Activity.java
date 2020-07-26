@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Activity extends Browsable {
+public class Activity extends Browsed {
 
     @Column(nullable = false)
     private String code;

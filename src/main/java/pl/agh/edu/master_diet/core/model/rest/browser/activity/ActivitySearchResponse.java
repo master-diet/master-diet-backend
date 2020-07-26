@@ -4,11 +4,11 @@ import lombok.*;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ActivitySearchResponse {
 
     private List<BaseActivityInfo> activities;
