@@ -45,14 +45,14 @@ public class ActivitySearchService extends SearchService<Activity> {
 
     public RecentActivityResponse getRecentActivities(Integer pageIndex, Integer perPage, Long userId) {
         List<UserActivity> result = userActivityRepository.findByUserId(userId);
-        Integer maximumPageNumber = userActivityPageFittingService.calculateMaximumPageNumber(result, perPage);
-        result = userActivityPageFittingService.adjustListToPageInfo(result, pageIndex, perPage);
+        Integer totalNumberOfProducts = result.size();
+        result = userActivityPageFittingService.adjustListToPageSize(result, pageIndex, perPage);
 
         return RecentActivityResponse.builder()
                 .activities(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
-                .maximumPageNumber(maximumPageNumber)
+                .maximumPageNumber(totalNumberOfProducts)
                 .build();
     }
 }

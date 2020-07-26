@@ -47,14 +47,14 @@ public class ProductSearchService extends SearchService<Product> {
     public RecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
         List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
         result = removeDuplicatedRecentProducts(result);
-        Integer maximumPageNumber = recentProductPageFittingService.calculateMaximumPageNumber(result, perPage);
-        result = recentProductPageFittingService.adjustListToPageInfo(result, pageIndex, perPage);
+        Integer totalNumberOfProducts = result.size();
+        result = recentProductPageFittingService.adjustListToPageSize(result, pageIndex, perPage);
 
         return RecentProductsResponse.builder()
                 .products(result.stream()
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
-                .maximumPageNumber(maximumPageNumber)
+                .maximumPageNumber(totalNumberOfProducts)
                 .build();
     }
 

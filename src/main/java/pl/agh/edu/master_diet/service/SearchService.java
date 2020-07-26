@@ -19,7 +19,7 @@ public abstract class SearchService<Searched extends AbstractBrowsed> {
     public SearchResult<Searched> searchBrowsable(String searchTerm, Integer pageIndex, Integer perPage) {
         List<Searched> searchedProducts = browserService.search(searchTerm);
         Integer maximumPageNumber = pageFittingService.calculateMaximumPageNumber(searchedProducts, perPage);
-        searchedProducts = pageFittingService.adjustListToPageInfo(searchedProducts, pageIndex, perPage);
+        searchedProducts = pageFittingService.adjustListToPageSize(searchedProducts, pageIndex, perPage);
         return SearchResult.<Searched>builder()
                 .result(searchedProducts)
                 .maximumPage(maximumPageNumber)

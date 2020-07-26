@@ -7,13 +7,9 @@ import java.util.List;
 @Service
 public class PageFittingService<T> {
 
-    public List<T> adjustListToPageInfo(List<T> pageableObjects, Integer pageIndex, Integer perPage) {
+    public List<T> adjustListToPageSize(List<T> pageableObjects, Integer pageIndex, Integer perPage) {
         int startIndex = (pageIndex - 1) * perPage;
         int endIndex = Math.min(pageableObjects.size(), pageIndex * perPage);
         return pageableObjects.subList(startIndex, endIndex);
-    }
-
-    public Integer calculateMaximumPageNumber(List<T> pageableObjects, Integer perPage) {
-        return (int) Math.ceil((double) pageableObjects.size() / perPage);
     }
 }
