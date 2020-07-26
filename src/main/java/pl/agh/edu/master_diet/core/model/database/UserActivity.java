@@ -1,20 +1,8 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,11 +18,8 @@ public class UserActivity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer sets;
-
-    private Integer reps;
-
-    private Float time;
+    @Column(nullable = false)
+    private Integer burnedCalories;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime auditDate;

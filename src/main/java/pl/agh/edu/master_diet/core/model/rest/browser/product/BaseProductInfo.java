@@ -1,11 +1,6 @@
-package pl.agh.edu.master_diet.core.model.rest.product_browser;
+package pl.agh.edu.master_diet.core.model.rest.browser.product;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.Unit;
 
 @Getter
