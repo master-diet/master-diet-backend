@@ -13,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 public class MultipleRecentProductsResponse {
 
-    private List<SingleRecentProductResponse> recentProducts;
+    private List<SingleRecentProductInfo> recentProducts;
 }

@@ -9,7 +9,7 @@ import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.DeleteRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
-import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductResponse;
+import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductInfo;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.repository.RecentProductRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
@@ -52,7 +52,7 @@ public class RecentProductService {
         final List<RecentProduct> recentProducts = recentProductRepository
                 .findByUserAndMealTimeDate(user.getId(), date);
 
-        final List<SingleRecentProductResponse> responseList = recentProducts.stream()
+        final List<SingleRecentProductInfo> responseList = recentProducts.stream()
                 .map(this::createSingleResponseForProduct)
                 .collect(toList());
 
@@ -71,7 +71,7 @@ public class RecentProductService {
                 .build();
     }
 
-    private SingleRecentProductResponse createSingleResponseForProduct(RecentProduct recentProduct) {
+    private SingleRecentProductInfo createSingleResponseForProduct(RecentProduct recentProduct) {
         final Product product = productService.getProductById(recentProduct.getProduct().getId());
 
         if (!Objects.equals(product.getUnit(), recentProduct.getPortionUnit())) {
@@ -82,7 +82,7 @@ public class RecentProductService {
         final Float weightEaten = recentProduct.getAmount() * recentProduct.getPortion();
         final Float coefficient = weightEaten / product.getDefaultValue();
 
-        return SingleRecentProductResponse.builder()
+        return SingleRecentProductInfo.builder()
                 .mealUnit(recentProduct.getPortionUnit())
                 .fatEaten(coefficient * product.getFat())
                 .caloriesEaten(coefficient * product.getCalories())

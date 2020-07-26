@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SingleRecentProductResponse {
+public class SingleRecentProductInfo {
 
     private MealType mealType;
 
