@@ -20,6 +20,9 @@ public abstract class SearchService<Searched extends Browsed> {
         List<Searched> searchedProducts = browserService.search(searchTerm);
         Integer maximumPageNumber = pageFittingService.calculateMaximumPageNumber(searchedProducts, perPage);
         searchedProducts = pageFittingService.adjustListToPageInfo(searchedProducts, pageIndex, perPage);
-        return new SearchResult<>(searchedProducts, maximumPageNumber);
+        return SearchResult.<Searched>builder()
+                .result(searchedProducts)
+                .maximumPage(maximumPageNumber)
+                .build();
     }
 }
