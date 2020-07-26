@@ -1,6 +1,10 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.agh.edu.master_diet.core.model.shared.Unit;
 
 import javax.persistence.Column;
@@ -33,7 +37,7 @@ public class Product extends AbstractBrowsed {
     private Unit unit;
 
     @Column(nullable = false)
-    private Long calories;
+    private Float calories;
 
     @Column(nullable = false)
     private Float proteins;
