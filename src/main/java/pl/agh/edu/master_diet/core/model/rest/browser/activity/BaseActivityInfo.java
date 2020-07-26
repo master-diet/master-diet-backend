@@ -12,4 +12,5 @@ public class BaseActivityInfo {
 
     private String name;
     private Integer burnedCalories;
+    private Double mets;
 }

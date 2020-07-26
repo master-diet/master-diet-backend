@@ -10,6 +10,7 @@ public class UserActivityConverter implements GenericConverter<UserActivity, Bas
     public BaseActivityInfo createFrom(UserActivity dto) {
         return BaseActivityInfo.builder()
                 .name(dto.getActivity().getName())
+                .burnedCalories(dto.getBurnedCalories())
                 .build();
     }
 }

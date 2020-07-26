@@ -9,6 +9,7 @@ import pl.agh.edu.master_diet.core.model.rest.browser.activity.RecentActivityRes
 import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.ActivityRepository;
 import pl.agh.edu.master_diet.repository.UserActivityRepository;
+import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ActivitySearchService extends SearchService<Activity> {
     private final ConversionService conversionService;
     private final UserActivityRepository userActivityRepository;
     private final PageFittingService<UserActivity> userActivityPageFittingService;
-    private final UserService
+    private final UserRepository userRepository;
 
     private final static Double METS_COEFFICIENT = 3.5;
     private final static Integer METS_CALORIC_COEFFICIENT = 200;
@@ -30,21 +31,24 @@ public class ActivitySearchService extends SearchService<Activity> {
                                  ActivityRepository activityRepository,
                                  PageFittingService<Activity> fittingService,
                                  UserActivityRepository userActivityRepository,
-                                 PageFittingService<UserActivity> userActivityPageFittingService) {
+                                 PageFittingService<UserActivity> userActivityPageFittingService,
+                                 UserRepository userRepository) {
         super(activityRepository, fittingService);
         this.conversionService = conversionService;
         this.userActivityRepository = userActivityRepository;
         this.userActivityPageFittingService = userActivityPageFittingService;
+        this.userRepository = userRepository;
     }
 
-    public ActivitySearchResponse searchActivity(String searchTerm, Integer pageIndex, Integer perPage, Integer userId) {
+    public ActivitySearchResponse searchActivity(String searchTerm, Integer pageIndex, Integer perPage, Long userId) {
         SearchResult<Activity> searchResult = searchBrowsable(searchTerm, pageIndex, perPage);
-        Integer userWeight =
+        Double userWeight = userRepository.getOne(userId).getUserPlan().getCurrentWeight();
         return ActivitySearchResponse.builder()
                 .activities(searchResult.getResult().stream()
                         .map(conversionService::convert)
-                        .map(result -> {
-                            result.setBurnedCalories(calculateMETS())
+                        .peek(result -> {
+                            Integer burnedCalories = calculateMETS(userWeight, result.getMets());
+                            result.setBurnedCalories(burnedCalories);
                         })
                         .collect(Collectors.toList()))
                 .maximumPageNumber(searchResult.getMaximumPage())
@@ -55,7 +59,6 @@ public class ActivitySearchService extends SearchService<Activity> {
         List<UserActivity> result = userActivityRepository.findByUserId(userId);
         Integer totalNumberOfProducts = result.size();
         result = userActivityPageFittingService.adjustListToPageSize(result, pageIndex, perPage);
-
         return RecentActivityResponse.builder()
                 .activities(result.stream()
                         .map(conversionService::convert)
@@ -64,7 +67,7 @@ public class ActivitySearchService extends SearchService<Activity> {
                 .build();
     }
 
-    public Integer calculateMETS(Integer userWeight, Integer mets) {
+    public Integer calculateMETS(Double userWeight, Double mets) {
         return (int) (mets * METS_COEFFICIENT * userWeight / METS_CALORIC_COEFFICIENT);
     }
 }

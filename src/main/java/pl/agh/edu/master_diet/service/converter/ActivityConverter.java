@@ -10,6 +10,7 @@ public class ActivityConverter implements GenericConverter<Activity, BaseActivit
     public BaseActivityInfo createFrom(Activity dto) {
         return BaseActivityInfo.builder()
                 .name(dto.getName())
+                .mets(dto.getMets())
                 .build();
     }
 }
