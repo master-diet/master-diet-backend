@@ -4,6 +4,9 @@ import pl.agh.edu.master_diet.core.model.database.Product;
 import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
+import pl.agh.edu.master_diet.core.model.database.*;
+import pl.agh.edu.master_diet.core.model.rest.browser.activity.BaseActivityInfo;
+import pl.agh.edu.master_diet.core.model.rest.browser.product.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
 import pl.agh.edu.master_diet.core.model.rest.product_browser.BaseProductInfo;
@@ -28,4 +31,8 @@ public interface ConversionService {
     BaseProductInfo convert(RecentProduct recentProduct);
 
     RecentProduct convert(RecentProductParameters parameters, Product product, User user);
+
+    BaseActivityInfo convert(Activity activity);
+
+    BaseActivityInfo convert(UserActivity userActivity);
 }

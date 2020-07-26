@@ -2,7 +2,9 @@ package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "activity")
@@ -11,23 +13,15 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Activity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Activity extends AbstractBrowsed {
 
     @Column(nullable = false)
-    private String name;
-
-    private String description;
+    private String code;
 
     @Column(nullable = false)
-    private Double burnedCalories;
+    private Double mets;
 
-    private Integer defaultReps;
+    @Column(nullable = false)
+    private String category;
 
-    private Integer defaultSets;
-
-    private Double defaultTime;
 }
