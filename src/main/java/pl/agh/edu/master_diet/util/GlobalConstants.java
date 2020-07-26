@@ -6,5 +6,4 @@ public final class GlobalConstants {
 
     private GlobalConstants() {
     }
-
 }

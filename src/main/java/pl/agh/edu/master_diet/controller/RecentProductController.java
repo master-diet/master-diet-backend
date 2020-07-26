@@ -56,5 +56,4 @@ public class RecentProductController {
                 .body(recentProductService
                         .deleteRecentProducts(request.getRecentProductsIds(), userPrincipal.getId()));
     }
-
 }

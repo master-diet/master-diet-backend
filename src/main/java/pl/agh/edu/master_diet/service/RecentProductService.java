@@ -96,6 +96,4 @@ public class RecentProductService {
                 .productName(product.getName())
                 .build();
     }
-
-
 }
