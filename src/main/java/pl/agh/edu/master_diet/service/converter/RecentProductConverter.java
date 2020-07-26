@@ -15,7 +15,7 @@ public final class RecentProductConverter
         return BaseProductInfo.builder()
                 .id(product.getId())
                 .name(product.getName())
-                .calories(product.getCalories().longValue())
+                .calories((long) (product.getCalories() / (100.0 / product.getDefaultValue())))
                 .defaultValue(product.getDefaultValue().longValue())
                 .unit(product.getUnit())
                 .build();

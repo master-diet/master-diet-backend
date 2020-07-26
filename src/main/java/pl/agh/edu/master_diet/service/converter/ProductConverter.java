@@ -13,7 +13,7 @@ public final class ProductConverter
         return BaseProductInfo.builder()
                 .id(dto.getId())
                 .name(dto.getName())
-                .calories(dto.getCalories().longValue())
+                .calories((long) (dto.getCalories() / (100.0 / dto.getDefaultValue())))
                 .defaultValue(dto.getDefaultValue().longValue())
                 .unit(dto.getUnit())
                 .build();

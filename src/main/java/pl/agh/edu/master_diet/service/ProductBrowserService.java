@@ -12,6 +12,7 @@ import pl.agh.edu.master_diet.repository.RecentProductsRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,6 +51,7 @@ public class ProductBrowserService {
 
     public GetRecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
         List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
+        result = removeDuplicatedRecentProducts(result);
         Integer totalNumberOfProducts = result.size();
         result = adjustListToPageSize(result, pageIndex, perPage);
 
@@ -84,6 +86,17 @@ public class ProductBrowserService {
             result = searchTerm.substring(0, typoIndex) + "_" + searchTerm.substring(typoIndex + 1);
         }
         return result.toLowerCase();
+    }
+
+    private List<RecentProduct> removeDuplicatedRecentProducts(List<RecentProduct> recentProducts) {
+        Set<Long> productIds = new HashSet<>();
+        List<RecentProduct> result = new ArrayList<>();
+        for (RecentProduct recentProduct : recentProducts) {
+            if (productIds.add(recentProduct.getProduct().getId())) {
+                result.add(recentProduct);
+            }
+        }
+        return result;
     }
 
     private <T> List<T> adjustListToPageSize(List<T> pageableObjects, Integer pageIndex, Integer perPage) {
