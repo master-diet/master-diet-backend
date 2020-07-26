@@ -49,7 +49,7 @@ public class ProductBrowserService {
     }
 
     public GetRecentProductsResponse getRecentProducts(Integer pageIndex, Integer perPage, Long userId) {
-        List<RecentProduct> result = recentProductsRepository.findByUserId(userId);
+        List<RecentProduct> result = recentProductRepository.findByUserId(userId);
         Integer totalNumberOfProducts = result.size();
         result = adjustListToPageSize(result, pageIndex, perPage);
 
