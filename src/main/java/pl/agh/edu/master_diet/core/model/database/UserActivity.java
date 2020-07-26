@@ -18,11 +18,8 @@ public class UserActivity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer sets;
-
-    private Integer reps;
-
-    private Float time;
+    @Column(nullable = false)
+    private Integer burnedCalories;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime auditDate;

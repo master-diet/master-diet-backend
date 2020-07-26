@@ -22,8 +22,9 @@ public class ActivityBrowserController {
     @GetMapping
     public ActivitySearchResponse searchProduct(@RequestParam String searchTerm,
                                                 @RequestParam Integer pageIndex,
-                                                @RequestParam Integer perPage) {
-        return activitySearchService.searchActivity(searchTerm, pageIndex, perPage);
+                                                @RequestParam Integer perPage,
+                                                @CurrentUser final UserPrincipal userPrincipal) {
+        return activitySearchService.searchActivity(searchTerm, pageIndex, perPage, userPrincipal.getId());
     }
 
     @GetMapping("/recent-activities")

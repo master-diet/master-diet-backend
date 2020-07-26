@@ -20,6 +20,10 @@ public class ActivitySearchService extends SearchService<Activity> {
     private final ConversionService conversionService;
     private final UserActivityRepository userActivityRepository;
     private final PageFittingService<UserActivity> userActivityPageFittingService;
+    private final UserService
+
+    private final static Double METS_COEFFICIENT = 3.5;
+    private final static Integer METS_CALORIC_COEFFICIENT = 200;
 
     @Autowired
     public ActivitySearchService(ConversionService conversionService,
@@ -33,11 +37,15 @@ public class ActivitySearchService extends SearchService<Activity> {
         this.userActivityPageFittingService = userActivityPageFittingService;
     }
 
-    public ActivitySearchResponse searchActivity(String searchTerm, Integer pageIndex, Integer perPage) {
+    public ActivitySearchResponse searchActivity(String searchTerm, Integer pageIndex, Integer perPage, Integer userId) {
         SearchResult<Activity> searchResult = searchBrowsable(searchTerm, pageIndex, perPage);
+        Integer userWeight =
         return ActivitySearchResponse.builder()
                 .activities(searchResult.getResult().stream()
                         .map(conversionService::convert)
+                        .map(result -> {
+                            result.setBurnedCalories(calculateMETS())
+                        })
                         .collect(Collectors.toList()))
                 .maximumPageNumber(searchResult.getMaximumPage())
                 .build();
@@ -54,5 +62,9 @@ public class ActivitySearchService extends SearchService<Activity> {
                         .collect(Collectors.toList()))
                 .maximumPageNumber(totalNumberOfProducts)
                 .build();
+    }
+
+    public Integer calculateMETS(Integer userWeight, Integer mets) {
+        return (int) (mets * METS_COEFFICIENT * userWeight / METS_CALORIC_COEFFICIENT);
     }
 }
