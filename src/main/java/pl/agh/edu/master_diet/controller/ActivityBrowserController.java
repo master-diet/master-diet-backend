@@ -20,17 +20,17 @@ public class ActivityBrowserController {
     private final ActivitySearchService activitySearchService;
 
     @GetMapping
-    public ActivitySearchResponse searchProduct(@RequestParam String searchTerm,
-                                                @RequestParam Integer pageIndex,
-                                                @RequestParam Integer perPage,
-                                                @CurrentUser final UserPrincipal userPrincipal) {
+    public ActivitySearchResponse searchActivity(@RequestParam String searchTerm,
+                                                 @RequestParam Integer pageIndex,
+                                                 @RequestParam Integer perPage,
+                                                 @CurrentUser final UserPrincipal userPrincipal) {
         return activitySearchService.searchActivity(searchTerm, pageIndex, perPage, userPrincipal.getId());
     }
 
     @GetMapping("/recent-activities")
-    public RecentActivityResponse getRecentProducts(@RequestParam Integer pageIndex,
-                                                    @RequestParam Integer perPage,
-                                                    @CurrentUser final UserPrincipal userPrincipal) {
+    public RecentActivityResponse getRecentActivities(@RequestParam Integer pageIndex,
+                                                      @RequestParam Integer perPage,
+                                                      @CurrentUser final UserPrincipal userPrincipal) {
         return activitySearchService.getRecentActivities(pageIndex, perPage, userPrincipal.getId());
     }
 }
