@@ -50,5 +50,4 @@ public final class RecentProductConverter
                 .user(user)
                 .build();
     }
-
 }
