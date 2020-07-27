@@ -1,18 +1,9 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "achievement")
@@ -39,5 +30,6 @@ public class Achievement {
     private Integer completeCondition;
 
     @Lob
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] photo;
 }

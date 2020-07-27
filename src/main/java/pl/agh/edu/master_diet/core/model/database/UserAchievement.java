@@ -1,7 +1,6 @@
 package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,8 +21,7 @@ public class UserAchievement {
     @Column(nullable = false)
     private Integer progress;
 
-    @Column(nullable = false, updatable = false)
-    @CreationTimestamp
+    @Column
     private LocalDateTime completedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

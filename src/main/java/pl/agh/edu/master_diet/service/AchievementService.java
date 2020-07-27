@@ -25,13 +25,15 @@ public class AchievementService {
     public Set<AchievementsResponse> getUserAchievements(Long userId) {
         List<UserAchievement> userAchievementList = userAchievementRepository.findByUserId(userId);
         List<Achievement> achievementList = achievementRepository.findAll();
+        Set<AchievementsResponse> userAchievementResponses = userAchievementList.stream()
+                .map(conversionService::convert)
+                .collect(Collectors.toSet());
+
         Set<AchievementsResponse> responsesSet = achievementList.stream()
                 .map(conversionService::convert)
                 .collect(Collectors.toSet());
-        List<AchievementsResponse> achievementsResponseList = userAchievementList.stream()
-                .map(conversionService::convert)
-                .collect(Collectors.toList());
-        responsesSet.addAll(achievementsResponseList);
-        return responsesSet;
+
+        userAchievementResponses.addAll(responsesSet);
+        return userAchievementResponses;
     }
 }
