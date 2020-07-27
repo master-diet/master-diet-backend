@@ -21,7 +21,6 @@ public class AchievementsController {
 
     @GetMapping
     public Set<AchievementsResponse> getUserAchievements(@CurrentUser final UserPrincipal userPrincipal) {
-        return achievementService.getUserAchievements(
-                userPrincipal.getId());
+        return achievementService.getUserAchievements(userPrincipal.getId());
     }
 }
