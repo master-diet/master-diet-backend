@@ -1,6 +1,7 @@
 package pl.agh.edu.master_diet.service;
 
-import pl.agh.edu.master_diet.core.model.database.Browsed;
+import lombok.RequiredArgsConstructor;
+import pl.agh.edu.master_diet.core.model.database.AbstractBrowsed;
 import pl.agh.edu.master_diet.repository.BrowserRepository;
 
 import java.util.ArrayList;
@@ -8,15 +9,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BrowserService<T extends Browsed> {
+@RequiredArgsConstructor
+public class BrowserService<T extends AbstractBrowsed> {
 
     private static final int ALLOW_SINGLE_TYPO_MINIMUM_WORD_LENGTH = 5;
 
     private final BrowserRepository<T> browserRepository;
-
-    public BrowserService(BrowserRepository<T> browserRepository) {
-        this.browserRepository = browserRepository;
-    }
 
     public List<T> search(String searchTerm) {
         searchTerm = searchTerm.trim().toLowerCase();

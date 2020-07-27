@@ -8,9 +8,11 @@ import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 import pl.agh.edu.master_diet.core.model.rest.browser.activity.BaseActivityInfo;
 import pl.agh.edu.master_diet.core.model.rest.browser.product.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.calculator.bmi.CalculateBMIRequest;
+import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.BMIParameters;
+import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 import pl.agh.edu.master_diet.service.AchievementConverter;
 
@@ -20,9 +22,9 @@ public final class ConversionServiceImpl implements ConversionService {
 
     private final UserParametersConverter userParametersConverter;
     private final UserPlanConverter userPlanConverter;
+    private final RecentProductConverter recentProductConverter;
     private final BMIConverter userBMIConverter;
     private final ProductConverter productConverter;
-    private final RecentProductConverter recentProductConverter;
     private final ActivityConverter activityConverter;
     private final UserActivityConverter userActivityConverter;
     private final UserAchievementConverter userAchievementConverter;
@@ -49,8 +51,18 @@ public final class ConversionServiceImpl implements ConversionService {
     }
 
     @Override
+    public RecentProductParameters convert(AddRecentProductRequest request) {
+        return recentProductConverter.createFrom(request);
+    }
+
+    @Override
     public BaseProductInfo convert(RecentProduct recentProduct) {
         return recentProductConverter.createFrom(recentProduct);
+    }
+
+    @Override
+    public RecentProduct convert(RecentProductParameters parameters, Product product, User user) {
+        return recentProductConverter.createFrom(parameters, product, user);
     }
 
     @Override

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Browsed {
+public abstract class AbstractBrowsed {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

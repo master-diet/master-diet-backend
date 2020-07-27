@@ -1,17 +1,14 @@
 package pl.agh.edu.master_diet.core.model.rest.user_plan;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Gender;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 
 import java.time.LocalDate;
+
+import static pl.agh.edu.master_diet.util.GlobalConstants.GLOBAL_DATE_FORMAT;
 
 @Getter
 @Setter
@@ -20,13 +17,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class UserParametersRequest {
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
-
     @NonNull
     private Long userId;
 
     @NonNull
-    @JsonFormat(pattern = DATE_FORMAT)
+    @JsonFormat(pattern = GLOBAL_DATE_FORMAT)
     private LocalDate birthDate;
 
     @NonNull

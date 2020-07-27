@@ -1,12 +1,12 @@
 package pl.agh.edu.master_diet.service;
 
-import pl.agh.edu.master_diet.core.model.database.Browsed;
+import pl.agh.edu.master_diet.core.model.database.AbstractBrowsed;
 import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.BrowserRepository;
 
 import java.util.List;
 
-public abstract class SearchService<Searched extends Browsed> {
+public abstract class SearchService<Searched extends AbstractBrowsed> {
 
     private final BrowserService<Searched> browserService;
     private final PageFittingService<Searched> pageFittingService;
@@ -18,8 +18,8 @@ public abstract class SearchService<Searched extends Browsed> {
 
     public SearchResult<Searched> searchBrowsable(String searchTerm, Integer pageIndex, Integer perPage) {
         List<Searched> searchedProducts = browserService.search(searchTerm);
-        Integer maximumPageNumber = pageFittingService.calculateMaximumPageNumber(searchedProducts, perPage);
-        searchedProducts = pageFittingService.adjustListToPageInfo(searchedProducts, pageIndex, perPage);
+        Integer maximumPageNumber = searchedProducts.size();
+        searchedProducts = pageFittingService.adjustListToPageSize(searchedProducts, pageIndex, perPage);
         return SearchResult.<Searched>builder()
                 .result(searchedProducts)
                 .maximumPage(maximumPageNumber)

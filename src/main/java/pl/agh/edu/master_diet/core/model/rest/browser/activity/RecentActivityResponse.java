@@ -16,4 +16,7 @@ public class RecentActivityResponse {
 
     @NonNull
     private Integer maximumPageNumber;
+
+    @NonNull
+    private Integer burnedCalories;
 }

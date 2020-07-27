@@ -5,7 +5,9 @@ import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 
 @Component
-public final class UserParametersConverter implements GenericConverter<UserParametersRequest, UserParameters> {
+public final class UserParametersConverter
+        implements GenericConverter<UserParametersRequest, UserParameters> {
+
     @Override
     public UserParameters createFrom(UserParametersRequest dto) {
         return UserParameters.builder()

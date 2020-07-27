@@ -11,7 +11,6 @@ import pl.agh.edu.master_diet.core.model.rest.browser.activity.RecentActivityRes
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
 import pl.agh.edu.master_diet.service.ActivitySearchService;
-import pl.agh.edu.master_diet.service.RecentSearchedService;
 
 @RestController
 @RequestMapping("/activity-browser")
@@ -19,19 +18,19 @@ import pl.agh.edu.master_diet.service.RecentSearchedService;
 public class ActivityBrowserController {
 
     private final ActivitySearchService activitySearchService;
-    private final RecentSearchedService recentSearchedService;
 
     @GetMapping
-    public ActivitySearchResponse searchProduct(@RequestParam String searchTerm,
-                                                @RequestParam Integer pageIndex,
-                                                @RequestParam Integer perPage) {
-        return activitySearchService.searchActivity(searchTerm, pageIndex, perPage);
+    public ActivitySearchResponse searchActivity(@RequestParam String searchTerm,
+                                                 @RequestParam Integer pageIndex,
+                                                 @RequestParam Integer perPage,
+                                                 @CurrentUser final UserPrincipal userPrincipal) {
+        return activitySearchService.searchActivity(searchTerm, pageIndex, perPage, userPrincipal.getId());
     }
 
     @GetMapping("/recent-activities")
-    public RecentActivityResponse getRecentProducts(@RequestParam Integer pageIndex,
-                                                    @RequestParam Integer perPage,
-                                                    @CurrentUser final UserPrincipal userPrincipal) {
-        return recentSearchedService.getRecentActivities(pageIndex, perPage, userPrincipal.getId());
+    public RecentActivityResponse getRecentActivities(@RequestParam Integer pageIndex,
+                                                      @RequestParam Integer perPage,
+                                                      @CurrentUser final UserPrincipal userPrincipal) {
+        return activitySearchService.getRecentActivities(pageIndex, perPage, userPrincipal.getId());
     }
 }

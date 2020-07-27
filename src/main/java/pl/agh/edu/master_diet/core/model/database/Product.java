@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product extends Browsed {
+public class Product extends AbstractBrowsed {
 
     @Pattern(regexp = "[\\d]+")
     private String barcode;
@@ -33,7 +33,7 @@ public class Product extends Browsed {
     private Unit unit;
 
     @Column(nullable = false)
-    private Long calories;
+    private Float calories;
 
     @Column(nullable = false)
     private Float proteins;
