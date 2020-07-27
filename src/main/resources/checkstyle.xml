@@ -196,7 +196,7 @@
         <module name="BooleanExpressionComplexity"/>
         <module name="ClassDataAbstractionCoupling"/>
         <module name="ClassFanOutComplexity">
-            <property name="max" value="30"/>
+            <property name="max" value="40"/>
         </module>
         <module name="CyclomaticComplexity"/>
         <module name="ThrowsCount"/>
