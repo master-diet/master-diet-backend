@@ -7,6 +7,7 @@ import pl.agh.edu.master_diet.service.converter.GenericConverter;
 
 @Component
 public class AchievementConverter implements GenericConverter<Achievement, AchievementsResponse> {
+
     private final static int NO_PROGRESS = 0;
 
     @Override

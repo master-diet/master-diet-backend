@@ -7,6 +7,7 @@ import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 
 @Component
 public class UserAchievementConverter implements GenericConverter<UserAchievement, AchievementsResponse> {
+
     @Override
     public AchievementsResponse createFrom(UserAchievement dto) {
         Achievement achievement = dto.getAchievement();

@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class ActivitySearchService extends SearchService<Activity> {
 
-    private final ConversionService conversionService;
     private final static Double METS_COEFFICIENT = 3.5;
     private final static Integer METS_CALORIC_COEFFICIENT = 200;
+
+    private final ConversionService conversionService;
     private final UserActivityRepository userActivityRepository;
     private final PageFittingService<UserActivity> userActivityPageFittingService;
     private final UserRepository userRepository;
