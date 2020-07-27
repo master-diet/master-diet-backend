@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Achievement;
 import pl.agh.edu.master_diet.core.model.database.UserAchievement;
+import pl.agh.edu.master_diet.core.model.rest.AchievementSetResponse;
 import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 import pl.agh.edu.master_diet.repository.AchievementRepository;
 import pl.agh.edu.master_diet.repository.UserAchievementRepository;
@@ -22,7 +23,7 @@ public class AchievementService {
     private final ConversionService conversionService;
     private final AchievementRepository achievementRepository;
 
-    public Set<AchievementsResponse> getUserAchievements(Long userId) {
+    public AchievementSetResponse getUserAchievements(Long userId) {
         List<UserAchievement> userAchievementList = userAchievementRepository.findByUserId(userId);
         List<Achievement> achievementList = achievementRepository.findAll();
         Set<AchievementsResponse> userAchievementResponses = userAchievementList.stream()
@@ -34,6 +35,8 @@ public class AchievementService {
                 .collect(Collectors.toSet());
 
         userAchievementResponses.addAll(responsesSet);
-        return userAchievementResponses;
+        return AchievementSetResponse.builder()
+                .achievementsResponseList(userAchievementResponses)
+                .build();
     }
 }
