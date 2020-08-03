@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="jfoder" id="product-csv-import">
+        <loadData file="products_dataset.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator="\t"
+                  tableName="product"
+                  usePreparedStatements="true">
+            <column header="default_value"
+                    name="default_value"
+                    type="NUMERIC"/>
+            <column header="calories"
+                    name="calories"
+                    type="NUMERIC"/>
+            <column header="proteins"
+                    name="proteins"
+                    type="NUMERIC"/>
+            <column header="carbohydrates"
+                    name="carbohydrates"
+                    type="NUMERIC"/>
+            <column header="fat"
+                    name="fat"
+                    type="NUMERIC"/>
+            <column header="approvals"
+                    name="approvals"
+                    type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="jfoder" id="activity-csv-import">
+        <loadData file="activities_dataset.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator=","
+                  tableName="activity"
+                  usePreparedStatements="true">
+            <column header="mets"
+                    name="mets"
+                    type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="jfoder" id="achievement-csv-import">
+        <loadData file="achievements_dataset.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator=","
+                  tableName="achievement"
+                  usePreparedStatements="true">
+            <column header="id"
+                    name="id"
+                    type="NUMERIC"/>
+            <column header="complete_condition"
+                    name="complete_condition"
+                    type="NUMERIC"/>
+            <column header="points"
+                    name="points"
+                    type="NUMERIC"/>
+            <column header="photo"
+                    name="photo"
+                    type="BLOB"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
