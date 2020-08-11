@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.service;
+package pl.agh.edu.master_diet.service.search;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +10,7 @@ import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.ActivityRepository;
 import pl.agh.edu.master_diet.repository.UserActivityRepository;
 import pl.agh.edu.master_diet.repository.UserRepository;
+import pl.agh.edu.master_diet.service.PageFittingService;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.List;

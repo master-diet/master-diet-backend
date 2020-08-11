@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.service;
+package pl.agh.edu.master_diet.service.search;
 
 import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Product;
@@ -8,6 +8,7 @@ import pl.agh.edu.master_diet.core.model.rest.browser.product.RecentProductsResp
 import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.ProductRepository;
 import pl.agh.edu.master_diet.repository.RecentProductRepository;
+import pl.agh.edu.master_diet.service.PageFittingService;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.ArrayList;

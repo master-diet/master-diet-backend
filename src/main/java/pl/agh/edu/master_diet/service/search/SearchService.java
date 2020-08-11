@@ -1,8 +1,10 @@
-package pl.agh.edu.master_diet.service;
+package pl.agh.edu.master_diet.service.search;
 
 import pl.agh.edu.master_diet.core.model.database.AbstractBrowsed;
 import pl.agh.edu.master_diet.core.model.shared.SearchResult;
 import pl.agh.edu.master_diet.repository.BrowserRepository;
+import pl.agh.edu.master_diet.service.BrowserService;
+import pl.agh.edu.master_diet.service.PageFittingService;
 
 import java.util.List;
 
