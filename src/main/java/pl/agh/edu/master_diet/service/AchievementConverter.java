@@ -15,7 +15,7 @@ public class AchievementConverter implements GenericConverter<Achievement, Achie
         return AchievementsResponse.builder()
                 .progress(NO_PROGRESS)
                 .points(dto.getPoints())
-                .photo(dto.getPhoto())
+                .imageUrl(dto.getImageUrl())
                 .completeCondition(dto.getCompleteCondition())
                 .description(dto.getDescription())
                 .name(dto.getName())

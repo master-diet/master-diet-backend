@@ -1,6 +1,11 @@
 package pl.agh.edu.master_diet.core.model.rest;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +28,7 @@ public class AchievementsResponse {
 
     @EqualsAndHashCode.Include()
     private Integer completeCondition;
-    private byte[] photo;
+    private String imageUrl;
     private Integer progress;
     private LocalDateTime completedDate;
 }

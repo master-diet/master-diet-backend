@@ -62,9 +62,6 @@
             <column header="points"
                     name="points"
                     type="NUMERIC"/>
-            <column header="photo"
-                    name="photo"
-                    type="BLOB"/>
         </loadData>
     </changeSet>
 

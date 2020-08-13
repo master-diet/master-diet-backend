@@ -15,7 +15,7 @@ public class UserAchievementConverter implements GenericConverter<UserAchievemen
                 .name(achievement.getName())
                 .description(achievement.getDescription())
                 .completeCondition(achievement.getCompleteCondition())
-                .photo(achievement.getPhoto())
+                .imageUrl(achievement.getImageUrl())
                 .points(achievement.getPoints())
                 .progress(dto.getProgress())
                 .completedDate(dto.getCompletedDate())
