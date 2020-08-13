@@ -10,7 +10,7 @@ import pl.agh.edu.master_diet.core.model.rest.browser.product.ProductSearchRespo
 import pl.agh.edu.master_diet.core.model.rest.browser.product.RecentProductsResponse;
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
-import pl.agh.edu.master_diet.service.ProductSearchService;
+import pl.agh.edu.master_diet.service.search.ProductSearchService;
 
 @RestController
 @RequestMapping("/product-browser")
