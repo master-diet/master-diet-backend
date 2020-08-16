@@ -1,0 +1,7 @@
+id,complete_condition,description,name,image_url,points
+1,1,Use dairy for a first time,First time,https://i.imgur.com/VBqCLGH.jpg,100
+2,1000000,Eat 1000 000 calories,Big eater,https://i.imgur.com/VBqCLGH.jpg,120
+5,1,Achieve your weight goals,Champion,https://i.imgur.com/VBqCLGH.jpg,200
+7,1000,Eat 1 kg of proteins,Meat Eater,https://i.imgur.com/VBqCLGH.jpg,140
+8,1000,Eat 1 kg of carbohydrates,Vegan,https://i.imgur.com/VBqCLGH.jpg,140
+6,100,Do 100 exercise,Fit Expert,https://i.imgur.com/VBqCLGH.jpg,200

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet author="jfoder" id="1597571551961-1">
+        <createTable tableName="achievement">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="achievement_pkey"/>
+            </column>
+            <column name="complete_condition" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="image_url" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="points" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-2">
+        <createTable tableName="activity">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="activity_pkey"/>
+            </column>
+            <column defaultValueNumeric="0" name="approvals" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mets" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-3">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="product_pkey"/>
+            </column>
+            <column defaultValueNumeric="0" name="approvals" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="barcode" type="VARCHAR(255)"/>
+            <column name="calories" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbohydrates" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="default_value" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fat" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="notes" type="VARCHAR(255)"/>
+            <column name="proteins" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-4">
+        <createTable tableName="user_gamification_detail">
+            <column defaultValueNumeric="0" name="cheat_tokens" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="complete_condition" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="level" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="points" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="user_gamification_detail_pkey"/>
+            </column>
+            <column name="daily_challenge_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-5">
+        <createTable tableName="daily_challenge">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="daily_challenge_pkey"/>
+            </column>
+            <column name="complete_condition" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="points" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-6">
+        <createTable tableName="user_plan">
+            <column name="activity_level" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calories" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="carbohydrates" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="current_weight" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fat" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="goal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="proteins" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_plan_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-7">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="birth_date" type="date"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firebase_token" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="height" type="INTEGER"/>
+            <column name="image_url" type="VARCHAR(255)"/>
+            <column name="last_login_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="provider" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="provider_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-8">
+        <createTable tableName="user_achievement">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="user_achievement_pkey"/>
+            </column>
+            <column name="completed_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="progress" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="achievement_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-9">
+        <createTable tableName="recent_product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="recent_product_pkey"/>
+            </column>
+            <column name="amount" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meal_time" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="meal_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="portion" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="portion_unit" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-10">
+        <createTable tableName="ingredient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ingredient_pkey"/>
+            </column>
+            <column name="amount" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="portion" type="FLOAT4">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipe_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-11">
+        <createTable tableName="recipe">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="recipe_pkey"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-12">
+        <createTable tableName="user_activity">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="user_activity_pkey"/>
+            </column>
+            <column name="audit_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="burned_calories" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activity_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-13">
+        <createTable tableName="user_weight">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="user_weight_pkey"/>
+            </column>
+            <column name="creation_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="weight" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-14">
+        <createTable tableName="notification">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="notification_pkey"/>
+            </column>
+            <column name="displayed" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-15">
+        <createTable tableName="level_threshold">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="level_threshold_pkey"/>
+            </column>
+            <column name="level" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="threshold_roof" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-16">
+        <addForeignKeyConstraint baseColumnNames="achievement_id"
+                                 baseTableName="user_achievement"
+                                 constraintName="fkcxeo6malce3dsw6tc43bcrwfd"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="achievement"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-17">
+        <addForeignKeyConstraint baseColumnNames="activity_id"
+                                 baseTableName="user_activity"
+                                 constraintName="fklw9o1xb2ki2hnwq1o3kk5dlja"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-18">
+        <createIndex indexName="name_index" tableName="product">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-19">
+        <addForeignKeyConstraint baseColumnNames="daily_challenge_id"
+                                 baseTableName="user_gamification_detail"
+                                 constraintName="fkifb6f0fmo26av1j8h0w6v0l3u"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="daily_challenge"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-20">
+        <addUniqueConstraint columnNames="firebase_token"
+                             constraintName="uk2a4wi2vnowyg6w58d3iw3q0nr"
+                             tableName="users"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-21">
+        <addUniqueConstraint columnNames="email"
+                             constraintName="uk6dotkott2kjsp8vw4d0m25fb7"
+                             tableName="users"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-22">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_achievement"
+                                 constraintName="fk5hq4ms9ikrxw18tf1wn12anj6"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-23">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="recent_product"
+                                 constraintName="fk7lsr0vy272y9mft95c2iphw4h"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-24">
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="recent_product"
+                                 constraintName="fktqpw479xon25d5mgwodr8te65"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-25">
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="ingredient"
+                                 constraintName="fkgg86fhhgm573id99ipfd2br19"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-26">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_activity"
+                                 constraintName="fks41is1raa3f0y5q5g0pw2rfd4"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-27">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_weight"
+                                 constraintName="fkmj4dkd5bw6eg8uh752a4h3ul3"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-28">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="notification"
+                                 constraintName="fknk4ftb5am9ubmkv1661h15ds9"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-29">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_gamification_detail"
+                                 constraintName="fk7gn14hxk20xrx113ckue8787b"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-30">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_plan"
+                                 constraintName="fk1agvnctnas4hcjfxcw5ggvi4a"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1597571551961-31">
+        <addForeignKeyConstraint baseColumnNames="recipe_id"
+                                 baseTableName="ingredient"
+                                 constraintName="fkj0s4ywmqqqw4h5iommigh5yja"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="recipe"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>

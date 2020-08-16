@@ -1,7 +1,10 @@
 package pl.agh.edu.master_diet.core.model.database;
 
-import lombok.*;
-import org.hibernate.annotations.Type;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -29,7 +32,5 @@ public class Achievement {
     @Column(nullable = false)
     private Integer completeCondition;
 
-    @Lob
-    @Type(type = "org.hibernate.type.BinaryType")
-    private byte[] photo;
+    private String imageUrl;
 }

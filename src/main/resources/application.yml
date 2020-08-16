@@ -10,7 +10,8 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        use_jdbc_metadata_defaults: false
 
   security:
     oauth2:
