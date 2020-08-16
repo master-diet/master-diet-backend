@@ -1,8 +1,6 @@
 spring:
   datasource:
     url: jdbc:postgresql://master-diet-db:5432/master-diet-db
-    username: postgres
-    password: postgres
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -20,43 +18,19 @@ spring:
       client:
         registration:
           google:
-            clientId: 597685077162-qu9s606hglv6k5jnk4j8faj5f1dtpdp0.apps.googleusercontent.com
-            clientSecret: Pq0m8cF0U2865TKHP_sxFAE1
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
               - profile
           facebook:
-            clientId: 575694906655236
-            clientSecret: ecb5d85550c991820fd0e009907e5d30
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - email
               - public_profile
           github:
-            clientId: 2b92fccd0a38f38e1288
-            clientSecret: 3ecc3c60a1de92c7277b7aa6b82372398b10a47c
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - user:email
               - read:user
-#          provider:
-#            facebook:
-#              authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
-#              tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
-#              userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
-app:
-  auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpirationMsec: 864000000
-  oauth2:
-    # After successfully authenticating with the OAuth2 Provider,
-    # we'll be generating an auth token for the user and sending the token to the
-    # redirectUri mentioned by the client in the /oauth2/authorize request.
-    # We're not using cookies because they won't work well in mobile clients.
-    authorizedRedirectUris:
-      - http://localhost:3000/oauth2/redirect
-      - myandroidapp://oauth2/redirect
-      - myiosapp://oauth2/redirect
 server:
   port: 8081

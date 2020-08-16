@@ -10,7 +10,7 @@ import pl.agh.edu.master_diet.core.model.rest.browser.activity.ActivitySearchRes
 import pl.agh.edu.master_diet.core.model.rest.browser.activity.RecentActivityResponse;
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
-import pl.agh.edu.master_diet.service.ActivitySearchService;
+import pl.agh.edu.master_diet.service.search.ActivitySearchService;
 
 @RestController
 @RequestMapping("/activity-browser")
