@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Product;
 import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 import pl.agh.edu.master_diet.core.model.database.User;
+import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductInfo;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
@@ -16,10 +17,9 @@ import pl.agh.edu.master_diet.repository.RecentProductRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -51,11 +51,17 @@ public class RecentProductService {
         final List<RecentProduct> recentProducts = recentProductRepository
                 .findByUserAndMealTimeDate(user.getId(), date);
 
-        final List<SingleRecentProductInfo> responseList = recentProducts.stream()
-                .map(this::createSingleResponseForProduct)
-                .collect(toList());
+        final List<SingleRecentProductInfo> responseList = new ArrayList<>();
+        final MultipleRecentProductsInfo summarizedInfo = new MultipleRecentProductsInfo();
+
+        for (RecentProduct recentProduct : recentProducts) {
+            SingleRecentProductInfo singleInfo = createSingleResponseForProduct(recentProduct);
+            summarizedInfo.updateValues(singleInfo);
+            responseList.add(singleInfo);
+        }
 
         return MultipleRecentProductsResponse.builder()
+                .summarizedInfo(summarizedInfo)
                 .recentProducts(responseList)
                 .build();
     }

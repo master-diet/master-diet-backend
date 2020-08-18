@@ -14,4 +14,5 @@ import java.util.List;
 public class MultipleRecentProductsResponse {
 
     private List<SingleRecentProductInfo> recentProducts;
+    private MultipleRecentProductsInfo summarizedInfo;
 }
