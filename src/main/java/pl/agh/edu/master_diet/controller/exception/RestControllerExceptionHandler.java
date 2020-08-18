@@ -17,7 +17,7 @@ import java.util.Arrays;
 public final class RestControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({DeleteException.class})
-    public ResponseEntity<StandardApiResponse> handleUserNotFoundException(final DeleteException e) {
+    public ResponseEntity<StandardApiResponse> handleDeleteException(final DeleteException e) {
         final StandardApiResponse apiResponse = StandardApiResponse.builder()
                 .success(false)
                 .message("Problem with deletion")
