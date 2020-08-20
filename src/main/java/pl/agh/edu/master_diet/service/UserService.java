@@ -4,17 +4,31 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import pl.agh.edu.master_diet.core.model.database.User;
+import pl.agh.edu.master_diet.core.model.database.UserWeight;
+import pl.agh.edu.master_diet.core.model.rest.profile.UserProfileResponse;
 import pl.agh.edu.master_diet.exception.ResourceNotFoundException;
 import pl.agh.edu.master_diet.repository.UserRepository;
+import pl.agh.edu.master_diet.repository.UserWeightRepository;
 
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserWeightRepository userWeightRepository;
 
     public User getUserById(final Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+    }
+
+    public UserProfileResponse getUserProfile(final Long userId) {
+        final User user = getUserById(userId);
+        final UserWeight userWeight = userWeightRepository.findByUserIdOrderByCreationDateDesc(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User weight", "user_id", userId));
+        return UserProfileResponse.builder()
+                .user(user)
+                .weight(userWeight.getWeight())
+                .build();
     }
 }
