@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonBackReference;
+import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsInfo;
+import pl.agh.edu.master_diet.core.model.rest.diary.demand.DemandStatusEnum;
 import pl.agh.edu.master_diet.core.model.shared.ActivityLevel;
 import pl.agh.edu.master_diet.core.model.shared.Goal;
 

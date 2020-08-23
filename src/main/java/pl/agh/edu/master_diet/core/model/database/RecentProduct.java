@@ -1,11 +1,13 @@
 package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
+import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductInfo;
 import pl.agh.edu.master_diet.core.model.shared.MealType;
 import pl.agh.edu.master_diet.core.model.shared.Unit;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "recent_product")
@@ -43,4 +45,28 @@ public class RecentProduct {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+
+    public SingleRecentProductInfo createSingleResponseForProduct() {
+        if (!Objects.equals(product.getUnit(), getPortionUnit())) {
+            throw new RuntimeException("Unit of product and recent product is not the same");
+            // TODO to be handled in the future
+        }
+
+        final Float weightEaten = amount * portion;
+        final Float coefficient = weightEaten / product.getDefaultValue();
+
+        return SingleRecentProductInfo.builder()
+                .mealUnit(portionUnit)
+                .fatEaten(coefficient * product.getFat())
+                .caloriesEaten(coefficient * product.getCalories())
+                .proteinsEaten(coefficient * product.getProteins())
+                .carbohydratesEaten(coefficient * product.getCarbohydrates())
+                .mealTime(mealTime)
+                .recentProductId(id)
+                .portion(portion)
+                .amount(amount)
+                .mealType(mealType)
+                .productName(product.getName())
+                .build();
+    }
 }

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.Product;
 import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 import pl.agh.edu.master_diet.core.model.database.User;
+import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductInfo;
+import pl.agh.edu.master_diet.core.model.rest.diary.demand.*;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.core.model.standard.StandardApiResponse;
 import pl.agh.edu.master_diet.exception.DeleteException;
@@ -19,7 +21,6 @@ import pl.agh.edu.master_diet.service.converter.ConversionService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -28,6 +29,7 @@ public class RecentProductService {
     private final RecentProductRepository recentProductRepository;
     private final UserService userService;
     private final ProductService productService;
+    private final UserPlanService userPlanService;
     private final ConversionService conversionService;
 
     public StandardApiResponse addRecentProduct(final RecentProductParameters parameters,
@@ -53,15 +55,19 @@ public class RecentProductService {
 
         final List<SingleRecentProductInfo> responseList = new ArrayList<>();
         final MultipleRecentProductsInfo summarizedInfo = new MultipleRecentProductsInfo();
+        final UserPlan userPlan = userPlanService.getUserPlan(user);
 
         for (RecentProduct recentProduct : recentProducts) {
-            SingleRecentProductInfo singleInfo = createSingleResponseForProduct(recentProduct);
+            SingleRecentProductInfo singleInfo = recentProduct.createSingleResponseForProduct();
             summarizedInfo.updateValues(singleInfo);
             responseList.add(singleInfo);
         }
 
+        final DemandInfo demandInfo = createDemandInfo(userPlan, summarizedInfo);
+
         return MultipleRecentProductsResponse.builder()
                 .summarizedInfo(summarizedInfo)
+                .demandInfo(demandInfo)
                 .recentProducts(responseList)
                 .build();
     }
@@ -81,29 +87,23 @@ public class RecentProductService {
                 .build();
     }
 
-    private SingleRecentProductInfo createSingleResponseForProduct(RecentProduct recentProduct) {
-        final Product product = productService.getProductById(recentProduct.getProduct().getId());
+    private DemandInfo createDemandInfo(final UserPlan userPlan,
+                                        final MultipleRecentProductsInfo summarizedInfo) {
 
-        if (!Objects.equals(product.getUnit(), recentProduct.getPortionUnit())) {
-            throw new RuntimeException("Unit of product and recent product is not the same");
-            // TODO to be handled in the future
-        }
-
-        final Float weightEaten = recentProduct.getAmount() * recentProduct.getPortion();
-        final Float coefficient = weightEaten / product.getDefaultValue();
-
-        return SingleRecentProductInfo.builder()
-                .mealUnit(recentProduct.getPortionUnit())
-                .fatEaten(coefficient * product.getFat())
-                .caloriesEaten(coefficient * product.getCalories())
-                .proteinsEaten(coefficient * product.getProteins())
-                .carbohydratesEaten(coefficient * product.getCarbohydrates())
-                .mealTime(recentProduct.getMealTime())
-                .recentProductId(recentProduct.getId())
-                .portion(recentProduct.getPortion())
-                .amount(recentProduct.getAmount())
-                .mealType(recentProduct.getMealType())
-                .productName(product.getName())
+        return DemandInfo.builder()
+                .fat(FatInfo.builder()
+                        // TODO: difference calcalation for all of infos
+                        .fat(userPlan.getFat())
+                        .build())
+                .calories(CaloriesInfo.builder()
+                        .calories(userPlan.getCalories())
+                        .build())
+                .proteins(ProteinsInfo.builder()
+                        .proteins(userPlan.getProteins())
+                        .build())
+                .carbohydrates(CarbohydratesInfo.builder()
+                        .carbohydrates(userPlan.getCarbohydrates())
+                        .build())
                 .build();
     }
 }
