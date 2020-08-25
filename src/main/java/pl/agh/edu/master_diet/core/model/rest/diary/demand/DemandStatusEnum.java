@@ -4,5 +4,5 @@ public enum DemandStatusEnum {
 
     EXCEED,
     CLOSE,
-    SAFE;
+    SAFE
 }
