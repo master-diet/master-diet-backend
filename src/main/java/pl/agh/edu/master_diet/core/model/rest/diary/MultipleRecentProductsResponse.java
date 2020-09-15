@@ -15,6 +15,7 @@ import java.util.List;
 public class MultipleRecentProductsResponse {
 
     private List<SingleRecentProductInfo> recentProducts;
-    private MultipleRecentProductsInfo summarizedInfo;
+    private List<SimpleSummaryRestProductInfo> summaryList;
+//    private MultipleRecentProductsInfo summarizedInfo;
     private DemandInfo demandInfo;
 }

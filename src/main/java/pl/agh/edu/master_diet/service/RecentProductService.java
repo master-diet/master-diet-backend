@@ -10,6 +10,7 @@ import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
+import pl.agh.edu.master_diet.core.model.rest.diary.SimpleSummaryRestProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.demand.*;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
@@ -54,7 +55,7 @@ public class RecentProductService {
                 .findByUserAndMealTimeDate(user.getId(), date);
 
         final List<SingleRecentProductInfo> responseList = new ArrayList<>();
-        final MultipleRecentProductsInfo summarizedInfo = new MultipleRecentProductsInfo();
+        final MultipleRecentProductsInfo summarizedInfo = MultipleRecentProductsInfo.createEmpty();
         final UserPlan userPlan = userPlanService.getUserPlan(user);
 
         for (RecentProduct recentProduct : recentProducts) {
@@ -66,7 +67,11 @@ public class RecentProductService {
         final DemandInfo demandInfo = createDemandInfo(userPlan, summarizedInfo);
 
         return MultipleRecentProductsResponse.builder()
-                .summarizedInfo(summarizedInfo)
+                .summaryList(SimpleSummaryRestProductInfo
+                        .fromNutrientInfoList(List.of(summarizedInfo.getFatInfo(),
+                                summarizedInfo.getCaloriesInfo(),
+                                summarizedInfo.getProteinsInfo(),
+                                summarizedInfo.getCarbohydratesInfo())))
                 .demandInfo(demandInfo)
                 .recentProducts(responseList)
                 .build();
@@ -90,20 +95,21 @@ public class RecentProductService {
     private DemandInfo createDemandInfo(final UserPlan userPlan,
                                         final MultipleRecentProductsInfo summarizedInfo) {
 
-        return DemandInfo.builder()
-                .fat(FatInfo.builder()
-                        // TODO: difference calcalation for all of infos
-                        .fat(userPlan.getFat())
-                        .build())
-                .calories(CaloriesInfo.builder()
-                        .calories(userPlan.getCalories())
-                        .build())
-                .proteins(ProteinsInfo.builder()
-                        .proteins(userPlan.getProteins())
-                        .build())
-                .carbohydrates(CarbohydratesInfo.builder()
-                        .carbohydrates(userPlan.getCarbohydrates())
-                        .build())
-                .build();
+//        return DemandInfo.builder()
+//                .fat(FatInfo.builder()
+//                        // TODO: difference calculation for all of infos
+//                        .sum(userPlan.getFat())
+//                        .build())
+//                .calories(CaloriesInfo.builder()
+//                        .sum(userPlan.getCalories())
+//                        .build())
+//                .proteins(ProteinsInfo.builder()
+//                        .sum(userPlan.getProteins())
+//                        .build())
+//                .carbohydrates(CarbohydratesInfo.builder()
+//                        .sum(userPlan.getCarbohydrates())
+//                        .build())
+//                .build();
+        return null;
     }
 }
