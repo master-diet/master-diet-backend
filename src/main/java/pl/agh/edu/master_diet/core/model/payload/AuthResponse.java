@@ -1,4 +1,4 @@
-package pl.agh.edu.master_diet.payload;
+package pl.agh.edu.master_diet.core.model.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiResponse {
+public class AuthResponse {
 
-    private boolean success;
-    private String message;
+    private final String tokenType = "Bearer";
+    private String accessToken;
 }

@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.agh.edu.master_diet.core.model.common.AuthProvider;
 import pl.agh.edu.master_diet.core.model.database.User;
+import pl.agh.edu.master_diet.core.model.payload.AuthResponse;
+import pl.agh.edu.master_diet.core.model.payload.LoginRequest;
+import pl.agh.edu.master_diet.core.model.payload.SignUpRequest;
+import pl.agh.edu.master_diet.core.model.standard.StandardApiResponse;
 import pl.agh.edu.master_diet.exception.BadRequestException;
-import pl.agh.edu.master_diet.payload.ApiResponse;
-import pl.agh.edu.master_diet.payload.AuthResponse;
-import pl.agh.edu.master_diet.payload.LoginRequest;
-import pl.agh.edu.master_diet.payload.SignUpRequest;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.security.TokenProvider;
 
@@ -74,7 +74,7 @@ public final class AuthController {
                 .buildAndExpand(result.getId()).toUri();
 
         return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "User registered successfully@"));
+                .body(new StandardApiResponse(true, "User registered successfully@"));
     }
 
 }

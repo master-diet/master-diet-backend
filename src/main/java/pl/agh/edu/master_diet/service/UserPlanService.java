@@ -8,6 +8,7 @@ import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.DemandCalculator;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
+import pl.agh.edu.master_diet.exception.UserPlanNotFoundException;
 import pl.agh.edu.master_diet.repository.UserPlanRepository;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
@@ -27,5 +28,10 @@ public class UserPlanService {
         userPlan.setUser(user);
         userPlanRepository.save(userPlan);
         return conversionService.convert(userPlan);
+    }
+
+    public UserPlan getUserPlan(final User user) {
+        return userPlanRepository.findByUser(user)
+                .orElseThrow(() -> new UserPlanNotFoundException("User plan not found"));
     }
 }
