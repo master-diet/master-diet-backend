@@ -76,23 +76,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .cors()
+        http.cors()
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .csrf()
-                .disable()
-                .formLogin()
-                .disable()
-                .httpBasic()
-                .disable()
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
                 .authorizeRequests()
                 .antMatchers("/ping", "/actuator/*").permitAll()
+                .antMatchers("/v2/api-docs",
+                        "/swagger-resources/configuration/ui",
+                        "/swagger-resources",
+                        "/swagger-resources/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()
                 .antMatchers("/",
                         "/error",
                         "/favicon.ico",
@@ -102,16 +103,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.jpg",
                         "/**/*.html",
                         "/**/*.css",
-                        "/**/*.js")
-                .permitAll()
-                .antMatchers("/auth/**", "/oauth2/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                        "/**/*.js").permitAll()
+                .antMatchers("/auth/**", "/oauth2/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .oauth2Login()
-                .authorizationEndpoint()
-                .baseUri("/oauth2/authorize")
+                .oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize")
                 .authorizationRequestRepository(cookieAuthorizationRequestRepository())
                 .and()
                 .redirectionEndpoint()
