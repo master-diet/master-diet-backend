@@ -20,3 +20,9 @@ http://localhost:8081/actuator/health
 
 {"status":"UP"}
 ```
+
+### Swagger API documentation
+
+```
+http://localhost:8081/swagger-ui.html
+```
