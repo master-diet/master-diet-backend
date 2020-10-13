@@ -21,5 +21,5 @@ public interface RecentProductRepository extends JpaRepository<RecentProduct, Lo
     List<RecentProduct> findByUserAndMealTimeDate(Long userId, LocalDate date);
 
     @Transactional
-    void deleteByUserIdAndId(Long userId, Long id);
+    Long deleteByUserIdAndId(Long userId, Long id);
 }

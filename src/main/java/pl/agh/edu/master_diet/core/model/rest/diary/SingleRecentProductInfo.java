@@ -30,4 +30,6 @@ public class SingleRecentProductInfo {
     private Float fatEaten;
     private Float carbohydratesEaten;
     private Long recentProductId;
+
+
 }

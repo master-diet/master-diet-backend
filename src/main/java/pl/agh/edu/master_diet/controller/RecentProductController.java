@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.agh.edu.master_diet.core.model.rest.diary.*;
+import pl.agh.edu.master_diet.core.model.standard.StandardApiResponse;
+import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
+import pl.agh.edu.master_diet.core.model.rest.diary.DeleteRecentProductsRequest;
+import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.security.CurrentUser;
 import pl.agh.edu.master_diet.security.UserPrincipal;
@@ -26,7 +29,7 @@ public class RecentProductController {
     private final RecentProductService recentProductService;
 
     @PostMapping("/add")
-    public ResponseEntity<AddRecentProductResponse> addRecentProduct(
+    public ResponseEntity<StandardApiResponse> addRecentProduct(
             @Valid @RequestBody final AddRecentProductRequest request,
             @CurrentUser final UserPrincipal userPrincipal) {
 
@@ -47,7 +50,7 @@ public class RecentProductController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<DeleteRecentProductsResponse> deleteRecentProducts(
+    public ResponseEntity<StandardApiResponse> deleteRecentProducts(
             @Valid @RequestBody final DeleteRecentProductsRequest request,
             @CurrentUser final UserPrincipal userPrincipal) {
 
