@@ -5,10 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserWeight;
+import pl.agh.edu.master_diet.core.model.rest.profile.UpdateUserWeightRequest;
+import pl.agh.edu.master_diet.core.model.rest.profile.UpdateUserWeightResponse;
 import pl.agh.edu.master_diet.core.model.rest.profile.UserProfileResponse;
 import pl.agh.edu.master_diet.exception.ResourceNotFoundException;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.repository.UserWeightRepository;
+
+import java.time.LocalDateTime;
 
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -24,11 +28,23 @@ public class UserService {
 
     public UserProfileResponse getUserProfile(final Long userId) {
         final User user = getUserById(userId);
-        final UserWeight userWeight = userWeightRepository.findByUserIdOrderByCreationDateDesc(userId)
+        final UserWeight userWeight = userWeightRepository.findFirstByUserIdOrderByCreationDateDesc(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User weight", "user_id", userId));
         return UserProfileResponse.builder()
                 .user(user)
                 .weight(userWeight.getWeight())
                 .build();
+    }
+
+    public UpdateUserWeightResponse updateUserWeight(final Long userId, final UpdateUserWeightRequest request) {
+        final User user = getUserById(userId);
+        final Long weightId = userWeightRepository.save(UserWeight.builder()
+                .user(user)
+                .weight(request.getWeight())
+                .creationDate(LocalDateTime.now())
+                .build())
+                .getId();
+
+        return new UpdateUserWeightResponse(weightId);
     }
 }
