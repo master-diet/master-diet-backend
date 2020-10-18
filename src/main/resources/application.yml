@@ -1,4 +1,12 @@
 spring:
+  main:
+    lazy-initialization: true
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
+  config:
+    location: classpath:/application.properties
   datasource:
     url: jdbc:postgresql://master-diet-db:5432/master-diet-db
     driver-class-name: org.postgresql.Driver
