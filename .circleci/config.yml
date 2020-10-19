@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/master-diet
 
     docker: # run the steps with Docker
-      - image: circleci/openjdk:14-jdk
+      - image: circleci/openjdk:14.0.0
 
     steps:
       - checkout
