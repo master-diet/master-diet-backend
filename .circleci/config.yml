@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/master-diet
 
     docker: # run the steps with Docker
-      - image: circleci/openjdk:14.0.0
+      - image: circleci/openjdk:14-jdk-buster-node-browsers
 
     steps:
       - checkout
