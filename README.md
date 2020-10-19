@@ -16,9 +16,13 @@ mvn checkstyle:checkstyle
 ### Test
 
 ```
-http://localhost:8081/actuator/health 
+http://localhost:8081/ping
 
-{"status":"UP"}
+Welcome to Master Diet
+
+App time:       2020-10-19T17:12:00.239871Z[UTC]
+
+Database time:  2020-10-19T17:12:00.670Z[UTC]
 ```
 
 ### Swagger API documentation
