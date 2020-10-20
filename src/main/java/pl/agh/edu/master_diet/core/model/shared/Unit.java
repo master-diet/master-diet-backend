@@ -9,7 +9,8 @@ import pl.agh.edu.master_diet.exception.UnitSymbolNotFoundException;
 @AllArgsConstructor
 public enum Unit {
     GRAMS("g"),
-    MILLILITERS("ml");
+    MILLILITERS("ml"),
+    MINUTES("min");
 
     private final String symbol;
 

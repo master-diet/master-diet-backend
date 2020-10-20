@@ -1,8 +1,12 @@
 package pl.agh.edu.master_diet.service.converter;
 
 import org.springframework.stereotype.Component;
+import pl.agh.edu.master_diet.core.model.database.Activity;
+import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserActivity;
 import pl.agh.edu.master_diet.core.model.rest.browser.activity.BaseActivityInfo;
+import pl.agh.edu.master_diet.core.model.rest.diary.AddUserActivityRequest;
+import pl.agh.edu.master_diet.core.model.shared.UserActivityParameters;
 
 @Component
 public class UserActivityConverter
@@ -13,6 +17,34 @@ public class UserActivityConverter
         return BaseActivityInfo.builder()
                 .name(dto.getActivity().getName())
                 .burnedCalories(dto.getBurnedCalories())
+                .build();
+    }
+
+    public UserActivityParameters createFrom(final AddUserActivityRequest request) {
+        return UserActivityParameters.builder()
+                .amount(request.getAmount())
+                .activityTime(request.getActivityTime())
+                .activityId(request.getActivityId())
+                .time(request.getTime())
+                .timeUnit(request.getTimeUnit())
+                .build();
+    }
+
+    public UserActivity createFrom(final UserActivityParameters parameters,
+                                   final Activity activity,
+                                   final User user) {
+        return UserActivity.builder()
+                .activity(activity)
+                .activityTime(parameters.getActivityTime())
+                .amount(parameters.getAmount())
+                .
+                .amount(parameters.getAmount())
+                .mealType(parameters.getMealType())
+                .mealTime(parameters.getMealTime())
+                .portion(parameters.getPortion())
+                .portionUnit(parameters.getPortionUnit())
+                .product(product)
+                .user(user)
                 .build();
     }
 }

@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class ActivitySearchService extends SearchService<Activity> {
 
-    private final static Double METS_COEFFICIENT = 3.5;
-    private final static Integer METS_CALORIC_COEFFICIENT = 200;
 
     private final ConversionService conversionService;
     private final UserActivityRepository userActivityRepository;
@@ -68,7 +66,5 @@ public class ActivitySearchService extends SearchService<Activity> {
                 .build();
     }
 
-    public Integer calculateMETS(Double userWeight, Double mets) {
-        return (int) (mets * METS_COEFFICIENT * userWeight / METS_CALORIC_COEFFICIENT);
-    }
+
 }

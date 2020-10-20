@@ -8,9 +8,11 @@ import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 import pl.agh.edu.master_diet.core.model.rest.browser.activity.BaseActivityInfo;
 import pl.agh.edu.master_diet.core.model.rest.browser.product.BaseProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
+import pl.agh.edu.master_diet.core.model.rest.diary.AddUserActivityRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
+import pl.agh.edu.master_diet.core.model.shared.UserActivityParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
 
 @Service
@@ -47,6 +49,11 @@ public final class ConversionServiceImpl implements ConversionService {
     }
 
     @Override
+    public UserActivityParameters convert(AddUserActivityRequest request) {
+        return userActivityConverter.createFrom(request);
+    }
+
+    @Override
     public BaseProductInfo convert(RecentProduct recentProduct) {
         return recentProductConverter.createFrom(recentProduct);
     }
@@ -54,6 +61,11 @@ public final class ConversionServiceImpl implements ConversionService {
     @Override
     public RecentProduct convert(RecentProductParameters parameters, Product product, User user) {
         return recentProductConverter.createFrom(parameters, product, user);
+    }
+
+    @Override
+    public UserActivity convert(UserActivityParameters parameters, Activity activity, User user) {
+        return userActivityConverter.createFrom(parameters, activity, user);
     }
 
     @Override

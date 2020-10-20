@@ -5,5 +5,6 @@ public enum MealType {
     LUNCH,
     DINNER,
     SUPPER,
-    SNACK
+    SNACK,
+    ACTIVITY
 }

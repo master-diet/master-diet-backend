@@ -1,6 +1,7 @@
 package pl.agh.edu.master_diet.core.model.database;
 
 import lombok.*;
+import pl.agh.edu.master_diet.core.model.rest.diary.SingleUserActivityInfo;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,4 +32,14 @@ public class UserActivity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id", nullable = false)
     private Activity activity;
+
+    public SingleUserActivityInfo createSingleResponseForActivity() {
+
+        return SingleUserActivityInfo.builder()
+                .activityName(activity.getName())
+                .activityTime(auditDate)
+                .userActivityId(id)
+                .caloriesBurned(burnedCalories)
+                .build();
+    }
 }
