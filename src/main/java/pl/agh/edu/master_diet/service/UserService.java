@@ -24,7 +24,8 @@ public class UserService {
     }
 
     public Integer calculateBurnedCalories(Long userId, Double mets, float time) {
-        Double userWeight = userWeightService.getLatestUserWeight(userId).getWeight();
+        User user = getUserById(userId);
+        Double userWeight = userWeightService.getLatestUserWeight(user).getWeight();
         return (int) (time * mets * METS_COEFFICIENT * userWeight / METS_CALORIC_COEFFICIENT);
     }
 }

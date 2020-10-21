@@ -34,7 +34,8 @@ public class UserActivityService {
 
         final UserActivity userActivity = conversionService.convert(parameters, activity, user);
         float time = parameters.getTime() * parameters.getAmount();
-        userService.calculateBurnedCalories(userId, activity.getMets(), time);
+        Integer burnedCalories = userService.calculateBurnedCalories(userId, activity.getMets(), time);
+        userActivity.setBurnedCalories(burnedCalories);
         userActivityRepository.save(userActivity);
 
         return StandardApiResponse.builder()

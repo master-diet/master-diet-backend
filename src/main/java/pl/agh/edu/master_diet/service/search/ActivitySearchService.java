@@ -11,6 +11,7 @@ import pl.agh.edu.master_diet.repository.ActivityRepository;
 import pl.agh.edu.master_diet.repository.UserActivityRepository;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.service.PageFittingService;
+import pl.agh.edu.master_diet.service.UserService;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.util.List;
@@ -19,11 +20,13 @@ import java.util.stream.Collectors;
 @Service
 public class ActivitySearchService extends SearchService<Activity> {
 
+    private final static int TIME = 100;
 
     private final ConversionService conversionService;
     private final UserActivityRepository userActivityRepository;
     private final PageFittingService<UserActivity> userActivityPageFittingService;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
     public ActivitySearchService(ConversionService conversionService,
@@ -31,12 +34,13 @@ public class ActivitySearchService extends SearchService<Activity> {
                                  PageFittingService<Activity> fittingService,
                                  UserActivityRepository userActivityRepository,
                                  PageFittingService<UserActivity> userActivityPageFittingService,
-                                 UserRepository userRepository) {
+                                 UserRepository userRepository, UserService userService) {
         super(activityRepository, fittingService);
         this.conversionService = conversionService;
         this.userActivityRepository = userActivityRepository;
         this.userActivityPageFittingService = userActivityPageFittingService;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public ActivitySearchResponse searchActivity(String searchTerm, Integer pageIndex, Integer perPage, Long userId) {
@@ -46,7 +50,8 @@ public class ActivitySearchService extends SearchService<Activity> {
                 .activities(searchResult.getResult().stream()
                         .map(conversionService::convert)
                         .peek(result -> {
-                            Integer burnedCalories = calculateMETS(userWeight, result.getMets());
+                            Double mets = result.getMets();
+                            Integer burnedCalories = userService.calculateBurnedCalories(userId, mets, TIME);
                             result.setBurnedCalories(burnedCalories);
                         })
                         .collect(Collectors.toList()))

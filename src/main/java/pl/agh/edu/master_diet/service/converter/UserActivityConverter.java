@@ -15,6 +15,7 @@ public class UserActivityConverter
     @Override
     public BaseActivityInfo createFrom(UserActivity dto) {
         return BaseActivityInfo.builder()
+                .id(dto.getActivity().getId())
                 .name(dto.getActivity().getName())
                 .burnedCalories(dto.getBurnedCalories())
                 .build();
@@ -34,16 +35,8 @@ public class UserActivityConverter
                                    final Activity activity,
                                    final User user) {
         return UserActivity.builder()
+                .auditDate(parameters.getActivityTime())
                 .activity(activity)
-                .activityTime(parameters.getActivityTime())
-                .amount(parameters.getAmount())
-                .
-                .amount(parameters.getAmount())
-                .mealType(parameters.getMealType())
-                .mealTime(parameters.getMealTime())
-                .portion(parameters.getPortion())
-                .portionUnit(parameters.getPortionUnit())
-                .product(product)
                 .user(user)
                 .build();
     }
