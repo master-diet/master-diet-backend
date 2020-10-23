@@ -13,6 +13,7 @@ public class ActivityConverter
         return BaseActivityInfo.builder()
                 .name(dto.getName())
                 .mets(dto.getMets())
+                .id(dto.getId())
                 .build();
     }
 }
