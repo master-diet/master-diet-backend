@@ -28,8 +28,9 @@ public class UserPlanService {
         UserPlan userPlan = demandCalculator.calculateUsersPlan(userParameters);
         User user = userRepository.getOne(userParameters.getUserId());
         userPlan.setUser(user);
-        updateExistingPlanOrInstertNew(user, userPlan);
+        updateExistingPlanOrInsertNew(user, userPlan);
         userPlanRepository.save(userPlan);
+        updateUserParameters(user, userParameters);
         return conversionService.convert(userPlan);
     }
 
@@ -47,14 +48,18 @@ public class UserPlanService {
                 .orElseThrow(() -> new UserPlanNotFoundException("User plan not found"));
     }
 
-    private void updateExistingPlanOrInstertNew(final User user, final UserPlan newUserPlan) {
+    private void updateExistingPlanOrInsertNew(final User user, final UserPlan newUserPlan) {
         Optional<UserPlan> currentUserPlanOptional = userPlanRepository.findByUser(user);
         if (currentUserPlanOptional.isPresent()) {
             UserPlan currentUserPlan = currentUserPlanOptional.get();
             newUserPlan.setId(currentUserPlan.getId());
-            userPlanRepository.save(newUserPlan);
-        } else {
-            userPlanRepository.save(newUserPlan);
         }
+        userPlanRepository.save(newUserPlan);
+    }
+
+    private void updateUserParameters(final User user, UserParameters userParameters) {
+        user.setBirthDate(userParameters.getBirthDate());
+        user.setHeight(userParameters.getHeight());
+        userRepository.save(user);
     }
 }
