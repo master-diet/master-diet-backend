@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserPlanService userPlanService;
     private final UserWeightRepository userWeightRepository;
 
     public User getUserById(final Long userId) {
@@ -44,6 +45,7 @@ public class UserService {
                 .creationDate(LocalDateTime.now())
                 .build())
                 .getId();
+        userPlanService.updateWeightInUserPlan(request.getWeight(), userId);
 
         return new UpdateUserWeightResponse(weightId);
     }

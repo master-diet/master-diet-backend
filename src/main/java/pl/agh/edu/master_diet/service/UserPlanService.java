@@ -13,6 +13,8 @@ import pl.agh.edu.master_diet.repository.UserPlanRepository;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserPlanService {
@@ -26,12 +28,33 @@ public class UserPlanService {
         UserPlan userPlan = demandCalculator.calculateUsersPlan(userParameters);
         User user = userRepository.getOne(userParameters.getUserId());
         userPlan.setUser(user);
+        updateExistingPlanOrInstertNew(user, userPlan);
         userPlanRepository.save(userPlan);
         return conversionService.convert(userPlan);
+    }
+
+    public void updateWeightInUserPlan(final Double newWeight, final Long userId) {
+        User user = userRepository.getOne(userId);
+        Optional<UserPlan> userPlan = userPlanRepository.findByUser(user);
+        if (userPlan.isPresent()) {
+            userPlan.get().setCurrentWeight(newWeight);
+            userPlanRepository.save(userPlan.get());
+        }
     }
 
     public UserPlan getUserPlan(final User user) {
         return userPlanRepository.findByUser(user)
                 .orElseThrow(() -> new UserPlanNotFoundException("User plan not found"));
+    }
+
+    private void updateExistingPlanOrInstertNew(final User user, final UserPlan newUserPlan) {
+        Optional<UserPlan> currentUserPlanOptional = userPlanRepository.findByUser(user);
+        if (currentUserPlanOptional.isPresent()) {
+            UserPlan currentUserPlan = currentUserPlanOptional.get();
+            newUserPlan.setId(currentUserPlan.getId());
+            userPlanRepository.save(newUserPlan);
+        } else {
+            userPlanRepository.save(newUserPlan);
+        }
     }
 }

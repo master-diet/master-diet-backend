@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 import pl.agh.edu.master_diet.core.model.database.User;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -15,9 +16,9 @@ import pl.agh.edu.master_diet.core.model.database.User;
 @NoArgsConstructor
 public class UserProfileResponse {
 
-    @NonNull
+    @NotNull
     private User user;
 
-    @NonNull
+    @NotNull
     private Double weight;
 }
