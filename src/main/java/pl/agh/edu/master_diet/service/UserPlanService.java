@@ -16,6 +16,7 @@ import pl.agh.edu.master_diet.repository.UserWeightRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -31,18 +32,43 @@ public class UserPlanService {
         UserPlan userPlan = demandCalculator.calculateUsersPlan(userParameters);
         User user = userRepository.getOne(userParameters.getUserId());
         userPlan.setUser(user);
+        updateExistingPlanOrInsertNew(user, userPlan);
         UserWeight userWeight = UserWeight.builder()
                 .creationDate(LocalDateTime.now())
                 .user(user)
                 .weight(userParameters.getWeight())
                 .build();
         userWeightRepository.save(userWeight);
-        userPlanRepository.save(userPlan);
+        updateUserParameters(user, userParameters);
         return conversionService.convert(userPlan);
+    }
+
+    public void updateWeightInUserPlan(final Double newWeight, final Long userId) {
+        User user = userRepository.getOne(userId);
+        Optional<UserPlan> userPlan = userPlanRepository.findByUser(user);
+        if (userPlan.isPresent()) {
+            userPlan.get().setCurrentWeight(newWeight);
+            userPlanRepository.save(userPlan.get());
+        }
     }
 
     public UserPlan getUserPlan(final User user) {
         return userPlanRepository.findByUser(user)
                 .orElseThrow(() -> new UserPlanNotFoundException("User plan not found"));
+    }
+
+    private void updateExistingPlanOrInsertNew(final User user, final UserPlan newUserPlan) {
+        Optional<UserPlan> currentUserPlanOptional = userPlanRepository.findByUser(user);
+        if (currentUserPlanOptional.isPresent()) {
+            UserPlan currentUserPlan = currentUserPlanOptional.get();
+            newUserPlan.setId(currentUserPlan.getId());
+        }
+        userPlanRepository.save(newUserPlan);
+    }
+
+    private void updateUserParameters(final User user, UserParameters userParameters) {
+        user.setBirthDate(userParameters.getBirthDate());
+        user.setHeight(userParameters.getHeight());
+        userRepository.save(user);
     }
 }

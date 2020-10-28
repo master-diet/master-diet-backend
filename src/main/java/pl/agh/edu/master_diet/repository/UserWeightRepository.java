@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface UserWeightRepository extends JpaRepository<UserWeight, Long> {
 
-    Optional<UserWeight> findTopByUserOrderByCreationDateDesc(User user);
+    Optional<UserWeight> findFirstByUserOrderByCreationDateDesc(User user);
 }
