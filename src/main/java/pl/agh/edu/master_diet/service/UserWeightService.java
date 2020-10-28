@@ -18,7 +18,7 @@ public class UserWeightService {
 
     @SneakyThrows
     public UserWeight getLatestUserWeight(User user) {
-        return userWeightRepository.findTopByUserOrderByCreationDateDesc(user)
+        return userWeightRepository.findFirstByUserOrderByCreationDateDesc(user)
                 .orElseThrow(() -> new NotFoundException("User weight not found"));
     }
 

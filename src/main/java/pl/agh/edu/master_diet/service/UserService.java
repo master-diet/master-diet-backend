@@ -33,7 +33,7 @@ public class UserService {
 
     public UserProfileResponse getUserProfile(final Long userId) {
         final User user = getUserById(userId);
-        final UserWeight userWeight = userWeightRepository.findFirstByUserIdOrderByCreationDateDesc(userId)
+        final UserWeight userWeight = userWeightRepository.findFirstByUserOrderByCreationDateDesc(user)
                 .orElseThrow(() -> new ResourceNotFoundException("User weight", "user_id", userId));
         return UserProfileResponse.builder()
                 .user(user)
