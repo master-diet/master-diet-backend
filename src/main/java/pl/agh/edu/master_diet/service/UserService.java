@@ -18,9 +18,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
+    private final static Double METS_COEFFICIENT = 3.5;
+    private final static Integer METS_CALORIC_COEFFICIENT = 200;
+
     private final UserRepository userRepository;
     private final UserPlanService userPlanService;
     private final UserWeightRepository userWeightRepository;
+    private final UserWeightService userWeightService;
 
     public User getUserById(final Long userId) {
         return userRepository.findById(userId)
@@ -48,5 +52,11 @@ public class UserService {
         userPlanService.updateWeightInUserPlan(request.getWeight(), userId);
 
         return new UpdateUserWeightResponse(weightId);
+    }
+
+    public Integer calculateBurnedCalories(Long userId, Double mets, float time) {
+        User user = getUserById(userId);
+        Double userWeight = userWeightService.getLatestUserWeight(user).getWeight();
+        return (int) (time * mets * METS_COEFFICIENT * userWeight / METS_CALORIC_COEFFICIENT);
     }
 }
