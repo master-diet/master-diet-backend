@@ -20,6 +20,11 @@ public interface RecentProductRepository extends JpaRepository<RecentProduct, Lo
             "ORDER BY RP.mealTime")
     List<RecentProduct> findByUserAndMealTimeDate(Long userId, LocalDate date);
 
+    @Query("SELECT SUM(RP.product.calories * (RP.portion / 100.0) * RP.amount) FROM RecentProduct RP " +
+            "WHERE RP.user.id = ?1 " +
+            "AND DATE(RP.mealTime) = ?2 ")
+    Integer getCaloriesConsumed(Long userId, LocalDate date);
+
     @Transactional
     Long deleteByUserIdAndId(Long userId, Long id);
 }
