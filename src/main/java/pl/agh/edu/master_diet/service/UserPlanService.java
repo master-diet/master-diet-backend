@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserPlan;
 import pl.agh.edu.master_diet.core.model.database.UserWeight;
-import pl.agh.edu.master_diet.core.model.rest.user_plan.UserCaloriesStatusResponse;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
 import pl.agh.edu.master_diet.core.model.shared.DemandCalculator;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
@@ -16,7 +15,6 @@ import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.repository.UserWeightRepository;
 import pl.agh.edu.master_diet.service.converter.ConversionService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -26,7 +24,6 @@ public class UserPlanService {
 
     private final UserPlanRepository userPlanRepository;
     private final UserRepository userRepository;
-    private final RecentProductService recentProductService;
     private final ConversionService conversionService;
     private final DemandCalculator demandCalculator;
     private final UserWeightRepository userWeightRepository;
@@ -53,16 +50,6 @@ public class UserPlanService {
             userPlan.get().setCurrentWeight(newWeight);
             userPlanRepository.save(userPlan.get());
         }
-    }
-
-    public UserCaloriesStatusResponse getUserCaloriesStatus(final LocalDate date, final Long userId) {
-        User user = userRepository.getOne(userId);
-        Integer dailyCaloricDemand = getUserPlan(user).getCalories();
-        Integer caloriesConsumed = recentProductService.getCaloriesConsumed(userId, date);
-        return UserCaloriesStatusResponse.builder()
-                .dailyCaloricDemand(dailyCaloricDemand)
-                .caloriesConsumed(caloriesConsumed)
-                .build();
     }
 
     public UserPlan getUserPlan(final User user) {

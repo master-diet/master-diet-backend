@@ -8,10 +8,13 @@ import pl.agh.edu.master_diet.core.model.database.UserWeight;
 import pl.agh.edu.master_diet.core.model.rest.profile.UpdateUserWeightRequest;
 import pl.agh.edu.master_diet.core.model.rest.profile.UpdateUserWeightResponse;
 import pl.agh.edu.master_diet.core.model.rest.profile.UserProfileResponse;
+import pl.agh.edu.master_diet.core.model.rest.user_plan.UserCaloriesStatusResponse;
 import pl.agh.edu.master_diet.exception.ResourceNotFoundException;
+import pl.agh.edu.master_diet.repository.RecentProductRepository;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.repository.UserWeightRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -25,6 +28,7 @@ public class UserService {
     private final UserPlanService userPlanService;
     private final UserWeightRepository userWeightRepository;
     private final UserWeightService userWeightService;
+    private final RecentProductRepository recentProductRepository;
 
     public User getUserById(final Long userId) {
         return userRepository.findById(userId)
@@ -58,5 +62,18 @@ public class UserService {
         User user = getUserById(userId);
         Double userWeight = userWeightService.getLatestUserWeight(user).getWeight();
         return (int) (time * mets * METS_COEFFICIENT * userWeight / METS_CALORIC_COEFFICIENT);
+    }
+
+    public UserCaloriesStatusResponse getUserCaloriesStatus(final LocalDate date, final Long userId) {
+        User user = userRepository.getOne(userId);
+        Integer dailyCaloricDemand = userPlanService.getUserPlan(user).getCalories();
+        Integer caloriesConsumed = recentProductRepository.getCaloriesConsumed(userId, date);
+        if (caloriesConsumed == null) {
+            caloriesConsumed = 0;
+        }
+        return UserCaloriesStatusResponse.builder()
+                .dailyCaloricDemand(dailyCaloricDemand)
+                .caloriesConsumed(caloriesConsumed)
+                .build();
     }
 }

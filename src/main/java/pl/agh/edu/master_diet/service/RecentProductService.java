@@ -92,10 +92,6 @@ public class RecentProductService {
                 .build();
     }
 
-    public Integer getCaloriesConsumed(final Long userId, final LocalDate date) {
-        return recentProductRepository.getCaloriesConsumed(userId, date);
-    }
-
     private DemandInfo createDemandInfo(final UserPlan userPlan,
                                         final MultipleRecentProductsInfo summarizedInfo) {
 
