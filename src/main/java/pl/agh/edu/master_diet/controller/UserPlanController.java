@@ -27,5 +27,4 @@ public class UserPlanController {
         UserParameters userParameters = conversionService.convert(request);
         return userPlanService.calculateAndSaveUsersPlan(userParameters);
     }
-
 }

@@ -12,7 +12,7 @@ import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.MultipleRecentProductsResponse;
 import pl.agh.edu.master_diet.core.model.rest.diary.SimpleSummaryRestProductInfo;
 import pl.agh.edu.master_diet.core.model.rest.diary.SingleRecentProductInfo;
-import pl.agh.edu.master_diet.core.model.rest.diary.demand.*;
+import pl.agh.edu.master_diet.core.model.rest.diary.demand.DemandInfo;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.core.model.standard.StandardApiResponse;
 import pl.agh.edu.master_diet.exception.DeleteException;
