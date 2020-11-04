@@ -8,6 +8,7 @@ import pl.agh.edu.master_diet.core.model.database.RecentProduct;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RecentProductRepository extends JpaRepository<RecentProduct, Long> {
@@ -23,7 +24,7 @@ public interface RecentProductRepository extends JpaRepository<RecentProduct, Lo
     @Query("SELECT SUM(RP.product.calories * (RP.portion / 100.0) * RP.amount) FROM RecentProduct RP " +
             "WHERE RP.user.id = ?1 " +
             "AND DATE(RP.mealTime) = ?2 ")
-    Integer getCaloriesConsumed(Long userId, LocalDate date);
+    Optional<Integer> getCaloriesConsumed(Long userId, LocalDate date);
 
     @Transactional
     Long deleteByUserIdAndId(Long userId, Long id);

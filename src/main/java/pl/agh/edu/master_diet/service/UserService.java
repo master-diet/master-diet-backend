@@ -67,10 +67,8 @@ public class UserService {
     public UserCaloriesStatusResponse getUserCaloriesStatus(final LocalDate date, final Long userId) {
         User user = userRepository.getOne(userId);
         Integer dailyCaloricDemand = userPlanService.getUserPlan(user).getCalories();
-        Integer caloriesConsumed = recentProductRepository.getCaloriesConsumed(userId, date);
-        if (caloriesConsumed == null) {
-            caloriesConsumed = 0;
-        }
+        Integer caloriesConsumed = recentProductRepository.getCaloriesConsumed(userId, date)
+                .orElse(0);
         return UserCaloriesStatusResponse.builder()
                 .dailyCaloricDemand(dailyCaloricDemand)
                 .caloriesConsumed(caloriesConsumed)
