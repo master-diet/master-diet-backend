@@ -16,6 +16,7 @@ import pl.agh.edu.master_diet.repository.UserWeightRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -73,5 +74,10 @@ public class UserService {
                 .dailyCaloricDemand(dailyCaloricDemand)
                 .caloriesConsumed(caloriesConsumed)
                 .build();
+    }
+
+    public List<UserWeight> getAllUserWeight(Long userId) {
+        User user = getUserById(userId);
+        return userWeightRepository.findAllByUserOrderByCreationDate(user);
     }
 }

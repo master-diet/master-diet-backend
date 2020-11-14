@@ -11,6 +11,7 @@ import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddUserActivityRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
+import pl.agh.edu.master_diet.core.model.rest.user_plan.UserWeightResponse;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserActivityParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
@@ -27,6 +28,7 @@ public final class ConversionServiceImpl implements ConversionService {
     private final UserActivityConverter userActivityConverter;
     private final UserAchievementConverter userAchievementConverter;
     private final AchievementConverter achievementConverter;
+    private final UserWeightConverter userWeightConverter;
 
     @Override
     public UserParameters convert(UserParametersRequest request) {
@@ -86,5 +88,10 @@ public final class ConversionServiceImpl implements ConversionService {
     @Override
     public AchievementsResponse convert(Achievement achievement) {
         return achievementConverter.createFrom(achievement);
+    }
+
+    @Override
+    public UserWeightResponse convert(UserWeight userWeight) {
+        return userWeightConverter.createFrom(userWeight);
     }
 }
