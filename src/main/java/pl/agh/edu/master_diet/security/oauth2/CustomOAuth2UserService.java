@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import pl.agh.edu.master_diet.core.model.common.AuthProvider;
 import pl.agh.edu.master_diet.core.model.database.User;
@@ -17,7 +18,9 @@ import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.security.UserPrincipal;
 import pl.agh.edu.master_diet.security.oauth2.user.OAuth2UserInfo;
 import pl.agh.edu.master_diet.security.oauth2.user.OAuth2UserInfoFactory;
+import pl.agh.edu.master_diet.service.AchievementService;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -25,8 +28,10 @@ import java.util.Optional;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
+    private final AchievementService achievementService;
 
     @Override
+    @Transactional
     public OAuth2User loadUser(final OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
 
@@ -83,7 +88,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                                     final OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setName(oAuth2UserInfo.getName());
         existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(existingUser);
+
+        LocalDateTime lastLoginDate = existingUser.getLastLoginDate();
+        LocalDateTime newLoginDate = LocalDateTime.now();
+        existingUser.setLastLoginDate(newLoginDate);
+
+        User user = userRepository.save(existingUser);
+        achievementService.updateLoggingInAchievementStatus(user.getId(), lastLoginDate, newLoginDate);
+        return user;
     }
 
 }

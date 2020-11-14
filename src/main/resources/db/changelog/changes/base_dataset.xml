@@ -65,4 +65,42 @@
         </loadData>
     </changeSet>
 
+    <changeSet author="jfoder" id="achievement-activity-items-csv-import">
+        <loadData file="achievement_activity_items_dataset.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator=","
+                  tableName="achievement_activity_item"
+                  usePreparedStatements="true">
+            <column header="id"
+                    name="id"
+                    type="NUMERIC"/>
+            <column header="achievement_id"
+                    name="achievement_id"
+                    type="NUMERIC"/>
+            <column header="activity_id"
+                    name="activity_id"
+                    type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet author="jfoder" id="achievement-product-items-csv-import">
+        <loadData file="achievement_product_items_dataset.csv"
+                  relativeToChangelogFile="true"
+                  schemaName="public"
+                  separator=","
+                  tableName="achievement_product_item"
+                  usePreparedStatements="true">
+            <column header="id"
+                    name="id"
+                    type="NUMERIC"/>
+            <column header="achievement_id"
+                    name="achievement_id"
+                    type="NUMERIC"/>
+            <column header="product_id"
+                    name="product_id"
+                    type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+
 </databaseChangeLog>

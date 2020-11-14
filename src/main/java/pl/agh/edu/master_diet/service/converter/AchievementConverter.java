@@ -8,7 +8,7 @@ import pl.agh.edu.master_diet.core.model.rest.AchievementsResponse;
 public class AchievementConverter
         implements GenericConverter<Achievement, AchievementsResponse> {
 
-    private final static int NO_PROGRESS = 0;
+    private final static Float NO_PROGRESS = 0.0f;
 
     @Override
     public AchievementsResponse createFrom(Achievement dto) {

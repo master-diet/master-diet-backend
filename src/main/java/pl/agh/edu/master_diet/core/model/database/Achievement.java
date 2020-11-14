@@ -5,8 +5,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.agh.edu.master_diet.core.model.shared.AchievementType;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "achievement")
@@ -30,7 +38,11 @@ public class Achievement {
     private Integer points;
 
     @Column(nullable = false)
-    private Integer completeCondition;
+    private Float completeCondition;
 
     private String imageUrl;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private AchievementType achievementType;
 }
