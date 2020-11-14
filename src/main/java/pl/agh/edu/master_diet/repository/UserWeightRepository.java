@@ -5,10 +5,13 @@ import org.springframework.stereotype.Repository;
 import pl.agh.edu.master_diet.core.model.database.User;
 import pl.agh.edu.master_diet.core.model.database.UserWeight;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface UserWeightRepository extends JpaRepository<UserWeight, Long> {
 
     Optional<UserWeight> findFirstByUserOrderByCreationDateDesc(User user);
+
+    List<UserWeight> findAllByUserOrderByCreationDate(User user);
 }

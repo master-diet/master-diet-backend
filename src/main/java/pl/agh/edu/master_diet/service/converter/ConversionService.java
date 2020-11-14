@@ -8,6 +8,7 @@ import pl.agh.edu.master_diet.core.model.rest.diary.AddRecentProductRequest;
 import pl.agh.edu.master_diet.core.model.rest.diary.AddUserActivityRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserParametersRequest;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserPlanResponse;
+import pl.agh.edu.master_diet.core.model.rest.user_plan.UserWeightResponse;
 import pl.agh.edu.master_diet.core.model.shared.RecentProductParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserActivityParameters;
 import pl.agh.edu.master_diet.core.model.shared.UserParameters;
@@ -37,4 +38,6 @@ public interface ConversionService {
     AchievementsResponse convert(UserAchievement userAchievement);
 
     AchievementsResponse convert(Achievement achievement);
+
+    UserWeightResponse convert(UserWeight userWeight);
 }
