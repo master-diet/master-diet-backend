@@ -68,9 +68,10 @@ public class RecentProductService {
 
         return MultipleRecentProductsResponse.builder()
                 .summaryList(SimpleSummaryRestProductInfo
-                        .fromNutrientInfoList(List.of(summarizedInfo.getFatInfo(),
+                        .fromNutrientInfoList(List.of(
                                 summarizedInfo.getCaloriesInfo(),
                                 summarizedInfo.getProteinsInfo(),
+                                summarizedInfo.getFatInfo(),
                                 summarizedInfo.getCarbohydratesInfo())))
                 .demandInfo(demandInfo)
                 .recentProducts(responseList)

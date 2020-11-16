@@ -9,6 +9,7 @@ import pl.agh.edu.master_diet.core.model.rest.diary.demand.AbstractNutrientInfo;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static pl.agh.edu.master_diet.util.CommonFormatters.roundFloatNumber;
 
 @Getter
 @Builder
@@ -28,7 +29,7 @@ public class SimpleSummaryRestProductInfo {
 
     private static SimpleSummaryRestProductInfo fromNutrientInfo(final AbstractNutrientInfo nutrientInfo) {
         return SimpleSummaryRestProductInfo.builder()
-                .sum(nutrientInfo.getSum())
+                .sum(roundFloatNumber(nutrientInfo.getSum()))
                 .description(nutrientInfo.getDescription())
                 .difference(nutrientInfo.getDifference())
                 .build();

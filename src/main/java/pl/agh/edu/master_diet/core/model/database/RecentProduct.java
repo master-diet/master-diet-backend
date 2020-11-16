@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static pl.agh.edu.master_diet.util.CommonFormatters.roundFloatNumber;
+
 @Entity
 @Table(name = "recent_product")
 @Getter
@@ -57,10 +59,10 @@ public class RecentProduct {
 
         return SingleRecentProductInfo.builder()
                 .mealUnit(portionUnit)
-                .fatEaten(coefficient * product.getFat())
-                .caloriesEaten(coefficient * product.getCalories())
-                .proteinsEaten(coefficient * product.getProteins())
-                .carbohydratesEaten(coefficient * product.getCarbohydrates())
+                .fatEaten(roundFloatNumber(coefficient * product.getFat()))
+                .caloriesEaten(roundFloatNumber(coefficient * product.getCalories()))
+                .proteinsEaten(roundFloatNumber(coefficient * product.getProteins()))
+                .carbohydratesEaten(roundFloatNumber(coefficient * product.getCarbohydrates()))
                 .mealTime(mealTime)
                 .recentProductId(id)
                 .portion(portion)
