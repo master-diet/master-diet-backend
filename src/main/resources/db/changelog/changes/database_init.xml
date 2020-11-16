@@ -365,7 +365,7 @@
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="NO ACTION"
-                                 onUpdate="NkO ACTION"
+                                 onUpdate="NO ACTION"
                                  referencedColumnNames="id"
                                  referencedTableName="achievement"
                                  validate="true"/>
