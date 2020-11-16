@@ -27,8 +27,8 @@ public class AchievementsResponse {
     private Integer points;
 
     @EqualsAndHashCode.Include()
-    private Integer completeCondition;
+    private Float completeCondition;
     private String imageUrl;
-    private Integer progress;
+    private Float progress;
     private LocalDateTime completedDate;
 }

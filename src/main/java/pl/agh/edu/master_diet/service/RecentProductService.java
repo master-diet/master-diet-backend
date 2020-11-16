@@ -32,6 +32,7 @@ public class RecentProductService {
     private final ProductService productService;
     private final UserPlanService userPlanService;
     private final ConversionService conversionService;
+    private final AchievementService achievementService;
 
     public StandardApiResponse addRecentProduct(final RecentProductParameters parameters,
                                                 final Long userId) {
@@ -40,6 +41,7 @@ public class RecentProductService {
 
         final RecentProduct recentProduct = conversionService.convert(parameters, product, user);
         recentProductRepository.save(recentProduct);
+        achievementService.updateProductAchievementStatus(userId, parameters);
 
         return StandardApiResponse.builder()
                 .success(true)

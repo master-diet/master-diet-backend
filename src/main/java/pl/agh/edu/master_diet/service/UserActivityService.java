@@ -27,6 +27,7 @@ public class UserActivityService {
     private final UserService userService;
     private final ActivityService productService;
     private final ConversionService conversionService;
+    private final AchievementService achievementService;
 
     public StandardApiResponse addUserActivity(UserActivityParameters parameters, Long userId) {
         final User user = userService.getUserById(userId);
@@ -37,6 +38,7 @@ public class UserActivityService {
         Integer burnedCalories = userService.calculateBurnedCalories(userId, activity.getMets(), time);
         userActivity.setBurnedCalories(burnedCalories);
         userActivityRepository.save(userActivity);
+        achievementService.updateActivityAchievementStatus(userId, parameters);
 
         return StandardApiResponse.builder()
                 .success(true)

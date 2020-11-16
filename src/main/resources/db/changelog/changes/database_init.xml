@@ -2,12 +2,26 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
-    <changeSet author="jfoder" id="1597571551961-1">
+    <changeSet author="jfoder" id="1605365882301-1">
+        <createTable tableName="achievement_activity_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="achievement_activity_item_pkey"/>
+            </column>
+            <column name="achievement_id" type="BIGINT"/>
+            <column name="activity_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1605365882301-2">
         <createTable tableName="achievement">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
                              primaryKey="true"
                              primaryKeyName="achievement_pkey"/>
+            </column>
+            <column name="achievement_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
             </column>
             <column name="complete_condition" type="INTEGER">
                 <constraints nullable="false"/>
@@ -22,7 +36,18 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-2">
+    <changeSet author="jfoder" id="1605365882301-3">
+        <createTable tableName="achievement_product_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="achievement_product_item_pkey"/>
+            </column>
+            <column name="achievement_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="jfoder" id="1605365882301-4">
         <createTable tableName="activity">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="activity_pkey"/>
@@ -44,7 +69,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-3">
+    <changeSet author="jfoder" id="1605365882301-5">
         <createTable tableName="product">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="product_pkey"/>
@@ -77,7 +102,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-4">
+    <changeSet author="jfoder" id="1605365882301-6">
         <createTable tableName="user_gamification_detail">
             <column defaultValueNumeric="0" name="cheat_tokens" type="INTEGER">
                 <constraints nullable="false"/>
@@ -99,7 +124,7 @@
             <column name="daily_challenge_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-5">
+    <changeSet author="jfoder" id="1605365882301-7">
         <createTable tableName="daily_challenge">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -117,7 +142,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-6">
+    <changeSet author="jfoder" id="1605365882301-8">
         <createTable tableName="user_plan">
             <column name="activity_level" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -145,7 +170,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-7">
+    <changeSet author="jfoder" id="1605365882301-9">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
@@ -170,7 +195,7 @@
             <column name="provider_id" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-8">
+    <changeSet author="jfoder" id="1605365882301-10">
         <createTable tableName="user_achievement">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -189,7 +214,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-9">
+    <changeSet author="jfoder" id="1605365882301-11">
         <createTable tableName="recent_product">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -219,7 +244,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-10">
+    <changeSet author="jfoder" id="1605365882301-12">
         <createTable tableName="ingredient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="ingredient_pkey"/>
@@ -239,7 +264,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-11">
+    <changeSet author="jfoder" id="1605365882301-13">
         <createTable tableName="recipe">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="recipe_pkey"/>
@@ -250,7 +275,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-12">
+    <changeSet author="jfoder" id="1605365882301-14">
         <createTable tableName="user_activity">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -271,7 +296,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-13">
+    <changeSet author="jfoder" id="1605365882301-15">
         <createTable tableName="user_weight">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -285,7 +310,7 @@
             <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-14">
+    <changeSet author="jfoder" id="1605365882301-16">
         <createTable tableName="notification">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -306,7 +331,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-15">
+    <changeSet author="jfoder" id="1605365882301-17">
         <createTable tableName="level_threshold">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false"
@@ -321,10 +346,10 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-16">
+    <changeSet author="jfoder" id="1605365882301-18">
         <addForeignKeyConstraint baseColumnNames="achievement_id"
-                                 baseTableName="user_achievement"
-                                 constraintName="fkcxeo6malce3dsw6tc43bcrwfd"
+                                 baseTableName="achievement_product_item"
+                                 constraintName="fkayhs81fcgxabfig7osjvg7noq"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="NO ACTION"
@@ -333,7 +358,43 @@
                                  referencedTableName="achievement"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-17">
+    <changeSet author="jfoder" id="1605365882301-19">
+        <addForeignKeyConstraint baseColumnNames="achievement_id"
+                                 baseTableName="user_achievement"
+                                 constraintName="fkcxeo6malce3dsw6tc43bcrwfd"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NkO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="achievement"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1605365882301-20">
+        <addForeignKeyConstraint baseColumnNames="achievement_id"
+                                 baseTableName="achievement_activity_item"
+                                 constraintName="fkma10lvik8g058i7p1kfh9cjbu"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="achievement"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1605365882301-21">
+        <addForeignKeyConstraint baseColumnNames="activity_id"
+                                 baseTableName="achievement_activity_item"
+                                 constraintName="fkcyl7pc0iv529fbhtsubptc7xv"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1605365882301-22">
         <addForeignKeyConstraint baseColumnNames="activity_id"
                                  baseTableName="user_activity"
                                  constraintName="fklw9o1xb2ki2hnwq1o3kk5dlja"
@@ -345,12 +406,12 @@
                                  referencedTableName="activity"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-18">
+    <changeSet author="jfoder" id="1605365882301-23">
         <createIndex indexName="name_index" tableName="product">
             <column name="name"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-19">
+    <changeSet author="jfoder" id="1605365882301-24">
         <addForeignKeyConstraint baseColumnNames="daily_challenge_id"
                                  baseTableName="user_gamification_detail"
                                  constraintName="fkifb6f0fmo26av1j8h0w6v0l3u"
@@ -362,17 +423,17 @@
                                  referencedTableName="daily_challenge"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-20">
+    <changeSet author="jfoder" id="1605365882301-25">
         <addUniqueConstraint columnNames="firebase_token"
                              constraintName="uk2a4wi2vnowyg6w58d3iw3q0nr"
                              tableName="users"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-21">
+    <changeSet author="jfoder" id="1605365882301-26">
         <addUniqueConstraint columnNames="email"
                              constraintName="uk6dotkott2kjsp8vw4d0m25fb7"
                              tableName="users"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-22">
+    <changeSet author="jfoder" id="1605365882301-27">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_achievement"
                                  constraintName="fk5hq4ms9ikrxw18tf1wn12anj6"
@@ -384,7 +445,7 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-23">
+    <changeSet author="jfoder" id="1605365882301-28">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="recent_product"
                                  constraintName="fk7lsr0vy272y9mft95c2iphw4h"
@@ -396,7 +457,7 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-24">
+    <changeSet author="jfoder" id="1605365882301-29">
         <addForeignKeyConstraint baseColumnNames="product_id"
                                  baseTableName="recent_product"
                                  constraintName="fktqpw479xon25d5mgwodr8te65"
@@ -408,7 +469,7 @@
                                  referencedTableName="product"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-25">
+    <changeSet author="jfoder" id="1605365882301-30">
         <addForeignKeyConstraint baseColumnNames="product_id"
                                  baseTableName="ingredient"
                                  constraintName="fkgg86fhhgm573id99ipfd2br19"
@@ -420,7 +481,7 @@
                                  referencedTableName="product"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-26">
+    <changeSet author="jfoder" id="1605365882301-31">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_activity"
                                  constraintName="fks41is1raa3f0y5q5g0pw2rfd4"
@@ -432,7 +493,7 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-27">
+    <changeSet author="jfoder" id="1605365882301-32">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_weight"
                                  constraintName="fkmj4dkd5bw6eg8uh752a4h3ul3"
@@ -444,7 +505,7 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-28">
+    <changeSet author="jfoder" id="1605365882301-33">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="notification"
                                  constraintName="fknk4ftb5am9ubmkv1661h15ds9"
@@ -456,7 +517,19 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-29">
+    <changeSet author="jfoder" id="1605365882301-34">
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="achievement_product_item"
+                                 constraintName="fkehhyme7ul0dfu7dfvda7smc3l"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="jfoder" id="1605365882301-35">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_gamification_detail"
                                  constraintName="fk7gn14hxk20xrx113ckue8787b"
@@ -468,7 +541,7 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-30">
+    <changeSet author="jfoder" id="1605365882301-36">
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="user_plan"
                                  constraintName="fk1agvnctnas4hcjfxcw5ggvi4a"
@@ -480,7 +553,7 @@
                                  referencedTableName="users"
                                  validate="true"/>
     </changeSet>
-    <changeSet author="jfoder" id="1597571551961-31">
+    <changeSet author="jfoder" id="1605365882301-37">
         <addForeignKeyConstraint baseColumnNames="recipe_id"
                                  baseTableName="ingredient"
                                  constraintName="fkj0s4ywmqqqw4h5iommigh5yja"
