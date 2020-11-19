@@ -7,6 +7,6 @@ public class FatInfo extends AbstractNutrientInfo {
 
     @Override
     public String getDescription() {
-        return "Fat";
+        return "Fats";
     }
 }
