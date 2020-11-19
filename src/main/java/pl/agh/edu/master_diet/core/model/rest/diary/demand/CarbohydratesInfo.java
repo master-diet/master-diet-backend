@@ -7,6 +7,6 @@ public class CarbohydratesInfo extends AbstractNutrientInfo {
 
     @Override
     public String getDescription() {
-        return "Carbohydrates";
+        return "Carbs";
     }
 }
