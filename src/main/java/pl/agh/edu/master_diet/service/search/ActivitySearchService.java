@@ -68,6 +68,9 @@ public class ActivitySearchService extends SearchService<Activity> {
                         .map(conversionService::convert)
                         .collect(Collectors.toList()))
                 .maximumPageNumber(totalNumberOfProducts)
+                .burnedCalories(result.stream()
+                        .mapToInt(UserActivity::getBurnedCalories)
+                        .sum())
                 .build();
     }
 
