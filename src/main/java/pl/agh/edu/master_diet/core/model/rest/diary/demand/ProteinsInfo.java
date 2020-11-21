@@ -9,4 +9,9 @@ public class ProteinsInfo extends AbstractNutrientInfo {
     public String getDescription() {
         return "Proteins";
     }
+
+    @Override
+    public String getIdentifier() {
+        return "proteins";
+    }
 }

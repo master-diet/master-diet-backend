@@ -9,4 +9,9 @@ public class FatInfo extends AbstractNutrientInfo {
     public String getDescription() {
         return "Fats";
     }
+
+    @Override
+    public String getIdentifier() {
+        return "fat";
+    }
 }
