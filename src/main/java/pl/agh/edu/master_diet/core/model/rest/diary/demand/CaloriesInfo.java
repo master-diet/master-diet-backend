@@ -9,4 +9,9 @@ public class CaloriesInfo extends AbstractNutrientInfo {
     public String getDescription() {
         return "Calories";
     }
+
+    @Override
+    public String getIdentifier() {
+        return "calories";
+    }
 }

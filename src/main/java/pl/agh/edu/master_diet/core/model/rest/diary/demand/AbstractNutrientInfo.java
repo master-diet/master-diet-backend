@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public abstract class AbstractNutrientInfo {
 
-    protected int difference;
     protected float sum;
 
     public void updateSum(final float sum) {
@@ -17,4 +16,6 @@ public abstract class AbstractNutrientInfo {
     }
 
     public abstract String getDescription();
+
+    public abstract String getIdentifier();
 }

@@ -66,16 +66,15 @@ public class RecentProductService {
             responseList.add(singleInfo);
         }
 
-        final DemandInfo demandInfo = createDemandInfo(userPlan, summarizedInfo);
-
         return MultipleRecentProductsResponse.builder()
                 .summaryList(SimpleSummaryRestProductInfo
-                        .fromNutrientInfoList(List.of(
-                                summarizedInfo.getCaloriesInfo(),
-                                summarizedInfo.getProteinsInfo(),
-                                summarizedInfo.getFatInfo(),
-                                summarizedInfo.getCarbohydratesInfo())))
-                .demandInfo(demandInfo)
+                        .fromNutrientInfoList(
+                                userPlan,
+                                List.of(
+                                        summarizedInfo.getCaloriesInfo(),
+                                        summarizedInfo.getProteinsInfo(),
+                                        summarizedInfo.getFatInfo(),
+                                        summarizedInfo.getCarbohydratesInfo())))
                 .recentProducts(responseList)
                 .build();
     }

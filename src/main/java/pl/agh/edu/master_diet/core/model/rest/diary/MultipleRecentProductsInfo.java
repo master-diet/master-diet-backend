@@ -12,6 +12,11 @@ import pl.agh.edu.master_diet.core.model.rest.diary.demand.*;
 @AllArgsConstructor
 public class MultipleRecentProductsInfo {
 
+    private FatInfo fatInfo;
+    private ProteinsInfo proteinsInfo;
+    private CarbohydratesInfo carbohydratesInfo;
+    private CaloriesInfo caloriesInfo;
+
     public static MultipleRecentProductsInfo createEmpty() {
         return MultipleRecentProductsInfo.builder()
                 .fatInfo(new FatInfo())
@@ -20,11 +25,6 @@ public class MultipleRecentProductsInfo {
                 .carbohydratesInfo(new CarbohydratesInfo())
                 .build();
     }
-
-    private FatInfo fatInfo;
-    private ProteinsInfo proteinsInfo;
-    private CarbohydratesInfo carbohydratesInfo;
-    private CaloriesInfo caloriesInfo;
 
     public void updateValues(final SingleRecentProductInfo info) {
         fatInfo.updateSum(info.getFatEaten());
