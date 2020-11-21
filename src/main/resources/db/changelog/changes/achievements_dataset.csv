@@ -1,9 +1,9 @@
 id,complete_condition,description,name,image_url,points,achievement_type
-1,1,First login,Welcome,https://i.imgur.com/VBqCLGH.jpg,100,LOGGING_IN
-2,5,Log in 7 days in a row,Week,https://i.imgur.com/VBqCLGH.jpg,200,LOGGING_IN
-3,2,Eat 2 packages (150g) of cashew nuts,Cashew nuts,https://i.imgur.com/VBqCLGH.jpg,100,PRODUCTS
-4,30,Perform 30 minutes of calisthenics (moderate effort),Strong man,https://i.imgur.com/VBqCLGH.jpg,300,ACTIVITIES
-5,10000,Consume 10 thousand calories,Big eater,https://i.imgur.com/VBqCLGH.jpg,100,CALORIES
-6,1000,Consume 1kg of proteins,Meat Eater,https://i.imgur.com/VBqCLGH.jpg,100,PROTEINS
-7,1000,Consume 1kg of carbohydrates,Vegan,https://i.imgur.com/VBqCLGH.jpg,100,CARBOHYDRATES
-8,1000,Consume 1kg of fat,Fatty,https://i.imgur.com/VBqCLGH.jpg,100,FAT
+1,1,First login,Welcome,https://i.imgur.com/bxh2nVV.jpg,100,LOGGING_IN
+2,5,Log in 7 days in a row,Week,https://i.imgur.com/24UUMc6.jpg,200,LOGGING_IN
+3,2,Eat 2 packages (150g) of cashew nuts,Cashew nuts,https://i.imgur.com/IhfGx3k.jpg,100,PRODUCTS
+4,30,Perform 30 minutes of calisthenics (moderate effort),Strong man,https://i.imgur.com/s0EdzEO.png,300,ACTIVITIES
+5,10000,Consume 10 thousand calories,Big eater,https://i.imgur.com/HQXTt8O.jpg,100,CALORIES
+6,1000,Consume 1kg of proteins,Meat Eater,https://i.imgur.com/uRlLkxB.jpg,100,PROTEINS
+7,1000,Consume 1kg of carbohydrates,Vegan,https://i.imgur.com/ptOcaig.jpg,100,CARBOHYDRATES
+8,1000,Consume 1kg of fat,Fatty,https://i.imgur.com/hwfrahh.jpg,100,FAT
