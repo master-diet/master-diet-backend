@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import pl.agh.edu.master_diet.core.model.database.User;
+import pl.agh.edu.master_diet.core.model.database.UserActivity;
 import pl.agh.edu.master_diet.core.model.database.UserWeight;
 import pl.agh.edu.master_diet.core.model.rest.profile.UpdateUserWeightRequest;
 import pl.agh.edu.master_diet.core.model.rest.profile.UpdateUserWeightResponse;
@@ -11,6 +12,7 @@ import pl.agh.edu.master_diet.core.model.rest.profile.UserProfileResponse;
 import pl.agh.edu.master_diet.core.model.rest.user_plan.UserCaloriesStatusResponse;
 import pl.agh.edu.master_diet.exception.ResourceNotFoundException;
 import pl.agh.edu.master_diet.repository.RecentProductRepository;
+import pl.agh.edu.master_diet.repository.UserActivityRepository;
 import pl.agh.edu.master_diet.repository.UserRepository;
 import pl.agh.edu.master_diet.repository.UserWeightRepository;
 
@@ -30,6 +32,7 @@ public class UserService {
     private final UserWeightRepository userWeightRepository;
     private final UserWeightService userWeightService;
     private final RecentProductRepository recentProductRepository;
+    private final UserActivityRepository userActivityRepository;
 
     public User getUserById(final Long userId) {
         return userRepository.findById(userId)
@@ -70,14 +73,23 @@ public class UserService {
         Integer dailyCaloricDemand = userPlanService.getUserPlan(user).getCalories();
         Integer caloriesConsumed = recentProductRepository.getCaloriesConsumed(userId, date)
                 .orElse(0);
+        Integer caloriesBurned = calculateBurnedCaloriesForDate(date, userId);
         return UserCaloriesStatusResponse.builder()
                 .dailyCaloricDemand(dailyCaloricDemand)
-                .caloriesConsumed(caloriesConsumed)
+                .caloriesConsumed(caloriesConsumed - caloriesBurned)
                 .build();
     }
 
     public List<UserWeight> getAllUserWeight(Long userId) {
         User user = getUserById(userId);
         return userWeightRepository.findAllByUserOrderByCreationDate(user);
+    }
+
+    private Integer calculateBurnedCaloriesForDate(final LocalDate date, final Long userId) {
+        final List<UserActivity> userActivities = userActivityRepository
+                .findByUserIdAndAuditDate(userId, date);
+        return userActivities.stream()
+                .mapToInt(UserActivity::getBurnedCalories)
+                .sum();
     }
 }
